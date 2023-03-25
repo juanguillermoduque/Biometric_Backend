@@ -42,6 +42,7 @@ class Server {
         this.app.use(express_1.default, (0, express_1.urlencoded)({ extended: false }));
     }
     routes() {
+        this.app.use('/', fichasRoutes_1.default);
         this.app.use('/api/fichas', fichasRoutes_1.default);
         this.app.use('/api/usuarios', usuariosRoutes_1.default);
         this.app.use('/api/asistencias', asistenciaRoutes_1.default);

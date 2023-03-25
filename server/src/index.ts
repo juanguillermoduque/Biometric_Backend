@@ -5,6 +5,7 @@ import cors from 'cors';
 import fichasRoutes from './routes/fichasRoutes';
 import asistenciaRoutes from './routes/asistenciaRoutes';
 import usuariosRoutes from './routes/usuariosRoutes';
+import indexRoutes from './routes/indexRoutes';
 
 class Server{
 
@@ -22,6 +23,7 @@ class Server{
         this.app.use(express,urlencoded({extended: false}));
     }
     routes(): void{
+        this.app.use('/',fichasRoutes);
         this.app.use('/api/fichas',fichasRoutes);
         this.app.use('/api/usuarios',usuariosRoutes);
         this.app.use('/api/asistencias',asistenciaRoutes);
