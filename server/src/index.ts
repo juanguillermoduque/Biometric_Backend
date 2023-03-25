@@ -3,6 +3,8 @@ import morgan from 'morgan';
 import cors from 'cors';
 
 import fichasRoutes from './routes/fichasRoutes';
+import asistenciaRoutes from './routes/asistenciaRoutes';
+import usuariosRoutes from './routes/usuariosRoutes';
 
 class Server{
 
@@ -21,6 +23,8 @@ class Server{
     }
     routes(): void{
         this.app.use('/api/fichas',fichasRoutes);
+        this.app.use('/api/usuarios',usuariosRoutes);
+        this.app.use('/api/asistencias',asistenciaRoutes);
     }
     start(): void{
         this.app.listen(this.app.get('port'),()=>{

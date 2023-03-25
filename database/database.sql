@@ -31,7 +31,8 @@ CREATE TABLE usuarios(
     FOREIGN KEY(idficha) REFERENCES fichas(idficha)
 );
 
-CREATE TABLE asistencia(idasistencia BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+CREATE TABLE asistencias(
+    idasistencia BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     iduser BIGINT UNSIGNED,
     date_enter DATETIME NOT NULL,
     comments VARCHAR(100),
