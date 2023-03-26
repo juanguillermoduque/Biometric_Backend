@@ -38,12 +38,13 @@ class UsuariosController {
         return __awaiter(this, void 0, void 0, function* () {
             const { id } = req.params;
             const usuarios = yield database_1.default.query("SELECT * FROM usuarios WHERE iduser = ?", [id]);
-            if (usuarios.length > 0) {
+            /*if(usuarios.length > 0){
                 return res.json(usuarios[0]);
             }
             res.status(404).json({
                 text: "usuario no exite"
-            });
+            });*/
+            console.log(usuarios);
         });
     }
 }

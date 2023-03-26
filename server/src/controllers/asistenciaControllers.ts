@@ -17,17 +17,18 @@ class AsistenciasController{
     public async update(req:Request,res:Response):Promise<void>{
         const {id} = req.params;
         await db.query('UPDATE asistencias SET ? WHERE idasistencia = ?',[req.body,id]);
-    }
+    } 
 
     public async getOne(req:Request,res:Response):Promise<any>{
         const {id} = req.params;
         const asistencias = await db.query("SELECT * FROM asistencias WHERE idasistencia = ?",[id]);
-        if(asistencias.length > 0){
+        /*if(asistencias > 0){
             return res.json(asistencias[0]);
         }
         res.status(404).json({
             text: "asistencia no exite"
-        });
+        });*/
+        console.log(asistencias);
     }
 }
 

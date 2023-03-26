@@ -25,9 +25,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importStar(require("express"));
 const morgan_1 = __importDefault(require("morgan"));
 const cors_1 = __importDefault(require("cors"));
+const body_parser_1 = __importDefault(require("body-parser"));
 const fichasRoutes_1 = __importDefault(require("./routes/fichasRoutes"));
 const asistenciaRoutes_1 = __importDefault(require("./routes/asistenciaRoutes"));
 const usuariosRoutes_1 = __importDefault(require("./routes/usuariosRoutes"));
+const indexRoutes_1 = __importDefault(require("./routes/indexRoutes"));
 class Server {
     constructor() {
         this.app = (0, express_1.default)();
@@ -38,11 +40,13 @@ class Server {
         this.app.set('port', process.env.PORT || 3000);
         this.app.use((0, morgan_1.default)('dev'));
         this.app.use((0, cors_1.default)());
+        this.app.use(body_parser_1.default.urlencoded({ extended: false }));
         this.app.use(express_1.default.json());
+        this.app.use(body_parser_1.default.json());
         this.app.use(express_1.default, (0, express_1.urlencoded)({ extended: false }));
     }
     routes() {
-        this.app.use('/', fichasRoutes_1.default);
+        this.app.use('/', indexRoutes_1.default);
         this.app.use('/api/fichas', fichasRoutes_1.default);
         this.app.use('/api/usuarios', usuariosRoutes_1.default);
         this.app.use('/api/asistencias', asistenciaRoutes_1.default);

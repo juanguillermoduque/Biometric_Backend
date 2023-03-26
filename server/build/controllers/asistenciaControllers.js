@@ -38,12 +38,13 @@ class AsistenciasController {
         return __awaiter(this, void 0, void 0, function* () {
             const { id } = req.params;
             const asistencias = yield database_1.default.query("SELECT * FROM asistencias WHERE idasistencia = ?", [id]);
-            if (asistencias.length > 0) {
+            /*if(asistencias > 0){
                 return res.json(asistencias[0]);
             }
             res.status(404).json({
                 text: "asistencia no exite"
-            });
+            });*/
+            console.log(asistencias);
         });
     }
 }

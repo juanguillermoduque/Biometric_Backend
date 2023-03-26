@@ -22,12 +22,13 @@ class UsuariosController{
     public async getOne(req:Request,res:Response):Promise<any>{
         const {id} = req.params;
         const usuarios = await db.query("SELECT * FROM usuarios WHERE iduser = ?",[id]);
-        if(usuarios.length > 0){
+        /*if(usuarios.length > 0){
             return res.json(usuarios[0]);
         }
         res.status(404).json({
             text: "usuario no exite"
-        });
+        });*/
+        console.log(usuarios);
     }
 }
 
