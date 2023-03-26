@@ -4,6 +4,6 @@ export default{
         user: 'root',
         password: 'sena123',
         database: 'biometric',
-        port: 3306
+        port: 3310
     }
 }

@@ -10,8 +10,8 @@ CREATE TABLE fichas(
     num_Students INT NOT NULL,
     date_start TIMESTAMP NOT NULL,
     date_end TIMESTAMP NOT NULL,
-    created_at TIMESTAMP NULL CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP NULL CURRENT_TIMESTAMP
+    created_at TIMESTAMP NULL  ,
+    updated_at TIMESTAMP NULL  
 );
 
 CREATE TABLE usuarios( 
@@ -26,16 +26,17 @@ CREATE TABLE usuarios(
     status enum('ACTIVO','INACTIVO'),
     password VARCHAR(80) NOT NULL,
     biometric_date BLOB, 
-    created_at TIMESTAMP NULL CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP NULL CURRENT_TIMESTAMP, 
+    created_at TIMESTAMP NULL  ,
+    updated_at TIMESTAMP NULL  , 
     FOREIGN KEY(idficha) REFERENCES fichas(idficha)
 );
 
 CREATE TABLE asistencias(
     idasistencia BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     iduser BIGINT UNSIGNED,
-    date_enter DATETIME NOT NULL,
+    date_enter TIMESTAMP NOT NULL,
     comments VARCHAR(100),
-    created_at TIMESTAMP NULL CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP NULL CURRENT_TIMESTAMP,
+    created_at TIMESTAMP NULL,
+    updated_at TIMESTAMP NULL,
+    FOREIGN KEY(iduser) REFERENCES usuarios(iduser)
 );

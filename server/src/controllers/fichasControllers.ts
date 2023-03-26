@@ -8,7 +8,8 @@ class FichasController{
     } 
 
     public async create(req:Request,res:Response):Promise<void>{
-        await db.query('INSERT INTO fichas SET ?',[req.body]);
+        await db.promise().query('INSERT INTO fichas SET ?',[req.body]);
+        console.log(req.body);
         res.json({
             message:"Ficha creada"
         });
@@ -22,12 +23,14 @@ class FichasController{
     public async getOne(req:Request,res:Response):Promise<any>{
         const {id} = req.params;
         const ficha = await db.query("SELECT * FROM fichas WHERE idficha = ?",[id]);
-        if(ficha.length > 0){
+        
+        /*if(ficha.length > 0){
             return res.json(ficha[0]);
         }
         res.status(404).json({
             text: "Ficha no exite"
-        });
+        });*/
+        console.log(ficha);
     }
 }
 

@@ -22,7 +22,8 @@ class FichasController {
     }
     create(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            yield database_1.default.query('INSERT INTO fichas SET ?', [req.body]);
+            yield database_1.default.promise().query('INSERT INTO fichas SET ?', [req.body]);
+            console.log(req.body);
             res.json({
                 message: "Ficha creada"
             });
@@ -38,12 +39,13 @@ class FichasController {
         return __awaiter(this, void 0, void 0, function* () {
             const { id } = req.params;
             const ficha = yield database_1.default.query("SELECT * FROM fichas WHERE idficha = ?", [id]);
-            if (ficha.length > 0) {
+            /*if(ficha.length > 0){
                 return res.json(ficha[0]);
             }
             res.status(404).json({
                 text: "Ficha no exite"
-            });
+            });*/
+            console.log(ficha);
         });
     }
 }
