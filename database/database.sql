@@ -8,8 +8,8 @@ CREATE TABLE fichas(
     name_ficha VARCHAR(50) NOT NULL,trimester INT NOT NULL,
     jornada ENUM('DIURNA','MIXTA','NOCTURNA'),
     num_Students INT NOT NULL,
-    date_start TIMESTAMP NOT NULL,
-    date_end TIMESTAMP NOT NULL,
+    date_start TIMESTAMP NULL,
+    date_end TIMESTAMP NULL,
     created_at TIMESTAMP NULL  ,
     updated_at TIMESTAMP NULL  
 );

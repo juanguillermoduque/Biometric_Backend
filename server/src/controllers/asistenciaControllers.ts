@@ -8,7 +8,7 @@ class AsistenciasController{
     } 
 
     public async create(req:Request,res:Response):Promise<void>{
-        await db.query('INSERT INTO asistencias SET ?',[req.body]);
+        await db.promise().query('INSERT INTO asistencias SET ?',[req.body]);
         res.json({
             message:"asistencia registrada"
         });
