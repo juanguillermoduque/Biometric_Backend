@@ -23,7 +23,7 @@ CREATE TABLE usuarios(
     email VARCHAR(80) UNIQUE NOT NULL,
     cellphone INT NOT NULL UNIQUE,
     rol enum('IN','AP','AD'),
-    status enum('ACTIVO','INACTIVO'),
+    status enum('ACTIVO','INACTIVO'), 
     password VARCHAR(80) NOT NULL,
     biometric_date BLOB, 
     created_at TIMESTAMP NULL  ,

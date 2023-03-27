@@ -3,7 +3,7 @@ import db from '../database';
 
 class FichasController{
     public async list(req:Request,res:Response):Promise<void>{
-       const fichas = await db.query('SELECT * FROM fichas');
+       const fichas = await db.promise().query('SELECT * FROM fichas');
        res.json(fichas);
     } 
 
@@ -13,24 +13,24 @@ class FichasController{
         res.json({
             message:"Ficha creada" 
         });
-    }
+    } 
 
     public async update(req:Request,res:Response):Promise<void>{
         const {id} = req.params;
-        await db.query('UPDATE fichas SET ? WHERE idfichas = ?',[req.body,id]);
-    } 
+        await db.promise().query('UPDATE fichas SET ? WHERE code_ficha = ?',[req.body,id]);
+    }  
 
     public async getOne(req:Request,res:Response):Promise<any>{
         const {id} = req.params;
-        const ficha = await db.query("SELECT * FROM fichas WHERE idficha = ?",[id]);
+        const ficha = await db.promise().query("SELECT * FROM fichas WHERE code_ficha = ?",[id]);
         
         if( Object.keys(ficha).length > 0){
-           // return res.json(ficha[0]);
+            return res.json(ficha[0]);
         }
         res.status(404).json({
             text: "Ficha no exite"
         });
-        console.log(ficha);
+        console.log(ficha.body);
     }
 }
 

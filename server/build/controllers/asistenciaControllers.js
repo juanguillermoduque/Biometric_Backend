@@ -16,7 +16,7 @@ const database_1 = __importDefault(require("../database"));
 class AsistenciasController {
     list(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const asistencias = yield database_1.default.query('SELECT * FROM asistencias');
+            const asistencias = yield database_1.default.promise().query('SELECT * FROM asistencias');
             res.json(asistencias);
         });
     }
@@ -31,19 +31,19 @@ class AsistenciasController {
     update(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const { id } = req.params;
-            yield database_1.default.query('UPDATE asistencias SET ? WHERE idasistencia = ?', [req.body, id]);
+            yield database_1.default.promise().query('UPDATE asistencias SET ? WHERE idasistencia = ?', [req.body, id]);
         });
     }
     getOne(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const { id } = req.params;
-            const asistencias = yield database_1.default.query("SELECT * FROM asistencias WHERE idasistencia = ?", [id]);
-            /*if(asistencias > 0){
+            const asistencias = yield database_1.default.promise().query("SELECT * FROM asistencias WHERE idasistencia = ?", [id]);
+            if (Object.keys(asistencias).length > 0) {
                 return res.json(asistencias[0]);
             }
             res.status(404).json({
                 text: "asistencia no exite"
-            });*/
+            });
             console.log(asistencias);
         });
     }

@@ -16,7 +16,7 @@ const database_1 = __importDefault(require("../database"));
 class UsuariosController {
     list(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const usuarios = yield database_1.default.query('SELECT * FROM usuarios');
+            const usuarios = yield database_1.default.promise().query('SELECT * FROM usuarios');
             res.json(usuarios);
         });
     }
@@ -31,19 +31,19 @@ class UsuariosController {
     update(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const { id } = req.params;
-            yield database_1.default.query('UPDATE usuarios SET ? WHERE iduser = ?', [req.body, id]);
+            yield database_1.default.promise().query('UPDATE usuarios SET ? WHERE iduser = ?', [req.body, id]);
         });
     }
     getOne(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const { id } = req.params;
-            const usuarios = yield database_1.default.query("SELECT * FROM usuarios WHERE iduser = ?", [id]);
-            /*if(usuarios.length > 0){
+            const usuarios = yield database_1.default.promise().query("SELECT * FROM usuarios WHERE iduser = ?", [id]);
+            if (Object.keys(usuarios).length > 0) {
                 return res.json(usuarios[0]);
             }
             res.status(404).json({
                 text: "usuario no exite"
-            });*/
+            });
             console.log(usuarios);
         });
     }

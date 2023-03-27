@@ -3,7 +3,7 @@ import db from '../database';
 
 class AsistenciasController{
     public async list(req:Request,res:Response):Promise<void>{
-       const asistencias = await db.query('SELECT * FROM asistencias');
+       const asistencias = await db.promise().query('SELECT * FROM asistencias');
        res.json(asistencias);
     } 
 
@@ -16,18 +16,18 @@ class AsistenciasController{
 
     public async update(req:Request,res:Response):Promise<void>{
         const {id} = req.params;
-        await db.query('UPDATE asistencias SET ? WHERE idasistencia = ?',[req.body,id]);
+        await db.promise().query('UPDATE asistencias SET ? WHERE idasistencia = ?',[req.body,id]);
     } 
 
-    public async getOne(req:Request,res:Response):Promise<any>{
+    public async getOne(req:Request,res:Response):Promise<any>{ 
         const {id} = req.params;
-        const asistencias = await db.query("SELECT * FROM asistencias WHERE idasistencia = ?",[id]);
-        /*if(asistencias > 0){
+        const asistencias = await db.promise().query("SELECT * FROM asistencias WHERE idasistencia = ?",[id]);
+        if(Object.keys(asistencias).length > 0){
             return res.json(asistencias[0]);
         }
         res.status(404).json({
             text: "asistencia no exite"
-        });*/
+        }); 
         console.log(asistencias);
     }
 }
