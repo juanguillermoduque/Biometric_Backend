@@ -1,6 +1,8 @@
+
 CREATE DATABASE biometric;
 
 USE biometric;
+
 
 CREATE TABLE usuarios( 
     num_id BIGINT UNSIGNED UNIQUE NOT NULL PRIMARY KEY,
@@ -13,15 +15,13 @@ CREATE TABLE usuarios(
     password VARCHAR(80) NOT NULL,
     biometric_date BIGINT,
     created_at TIMESTAMP NULL,
-    updated_at TIMESTAMP NULL, 
+    updated_at TIMESTAMP NULL
 );
 
 CREATE TABLE fichas(
     id_ficha BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    name_ficha VARCHAR()
     code_ficha BIGINT UNSIGNED UNIQUE NOT NULL, 
     name_ficha VARCHAR(50) NOT NULL,
-    --num_students INT NOT NULL,
     date_start DATE NULL,
     date_end DATE NULL,
     created_at TIMESTAMP NULL,
@@ -36,7 +36,7 @@ CREATE TABLE competencias(
 );
 
 CREATE TABLE ficha_Instructor(
-    id_ficha_Instructor BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY
+    id_ficha_Instructor BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     id_ficha BIGINT UNSIGNED,
     id_instructor BIGINT UNSIGNED,
     FOREIGN KEY(id_ficha) REFERENCES fichas(id_ficha),
