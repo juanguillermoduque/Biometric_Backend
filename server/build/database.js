@@ -6,7 +6,12 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const mysql2_1 = __importDefault(require("mysql2"));
 const keys_1 = __importDefault(require("./keys"));
 const pool = mysql2_1.default.createPool(keys_1.default.database);
-pool.getConnection((err, conn) => {
-    console.log("conexion exitosa");
+pool.getConnection((err) => {
+    if (err) {
+        console.log("error de conexion");
+    }
+    else {
+        console.log("conexion exitosa");
+    }
 });
 exports.default = pool;
