@@ -1,8 +1,7 @@
-
+DROP DATABASE  IF EXISTS biometric;
 CREATE DATABASE biometric;
 
 USE biometric;
-
 
 CREATE TABLE usuarios( 
     num_id BIGINT UNSIGNED UNIQUE NOT NULL PRIMARY KEY,

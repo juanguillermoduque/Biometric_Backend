@@ -13,40 +13,40 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const database_1 = __importDefault(require("../database"));
-class UsuariosController {
+class CompetenciasController {
     list(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const usuarios = yield database_1.default.promise().query('SELECT * FROM usuarios');
-            res.json(usuarios);
+            const competencias = yield database_1.default.promise().query('SELECT * FROM competencias');
+            res.json(competencias);
         });
     }
     create(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            yield database_1.default.promise().query('INSERT INTO usuarios SET ?', [req.body]);
+            yield database_1.default.promise().query('INSERT INTO competencias SET ?', [req.body]);
             res.json({
-                message: "usuarios creados"
+                message: "competencias creadas"
             });
         });
     }
     update(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const { id } = req.params;
-            yield database_1.default.promise().query('UPDATE usuarios SET ? WHERE num_id = ?', [req.body, id]);
+            yield database_1.default.promise().query('UPDATE competencias SET ? WHERE id_competencia = ?', [req.body, id]);
         });
     }
     getOne(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const { id } = req.params;
-            const usuarios = yield database_1.default.promise().query("SELECT * FROM usuarios WHERE num_id = ?", [id]);
-            if (Object.keys(usuarios).length > 0) {
-                return res.json(usuarios[0]);
+            const competencias = yield database_1.default.promise().query("SELECT * FROM competencias WHERE id_competencia = ?", [id]);
+            if (Object.keys(competencias).length > 0) {
+                return res.json(competencias[0]);
             }
             res.status(404).json({
-                text: "usuario no exite"
+                text: "competencia no exite"
             });
-            console.log(usuarios);
+            console.log(competencias);
         });
     }
 }
-const usuariosController = new UsuariosController();
-exports.default = usuariosController;
+const competenciasController = new CompetenciasController();
+exports.default = competenciasController;

@@ -1,3 +1,4 @@
+//variables de conexion a la bd
 export default{
     database:{
         host: 'localhost',

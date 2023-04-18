@@ -16,12 +16,12 @@ class AsistenciasController{
 
     public async update(req:Request,res:Response):Promise<void>{
         const {id} = req.params;
-        await db.promise().query('UPDATE asistencias SET ? WHERE idasistencia = ?',[req.body,id]);
+        await db.promise().query('UPDATE asistencias SET ? WHERE id_asistencia = ?',[req.body,id]);
     } 
 
     public async getOne(req:Request,res:Response):Promise<any>{ 
         const {id} = req.params;
-        const asistencias = await db.promise().query("SELECT * FROM asistencias WHERE idasistencia = ?",[id]);
+        const asistencias = await db.promise().query("SELECT * FROM asistencias WHERE id_asistencia = ?",[id]);
         if(Object.keys(asistencias).length > 0){
             return res.json(asistencias[0]);
         }

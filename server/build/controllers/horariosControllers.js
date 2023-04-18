@@ -13,40 +13,40 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const database_1 = __importDefault(require("../database"));
-class UsuariosController {
+class HorariosController {
     list(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const usuarios = yield database_1.default.promise().query('SELECT * FROM usuarios');
-            res.json(usuarios);
+            const horario = yield database_1.default.promise().query('SELECT * FROM horario');
+            res.json(horario);
         });
     }
     create(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            yield database_1.default.promise().query('INSERT INTO usuarios SET ?', [req.body]);
+            yield database_1.default.promise().query('INSERT INTO horario SET ?', [req.body]);
             res.json({
-                message: "usuarios creados"
+                message: "horario creado"
             });
         });
     }
     update(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const { id } = req.params;
-            yield database_1.default.promise().query('UPDATE usuarios SET ? WHERE num_id = ?', [req.body, id]);
+            yield database_1.default.promise().query('UPDATE horario SET ? WHERE id_horario = ?', [req.body, id]);
         });
     }
     getOne(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const { id } = req.params;
-            const usuarios = yield database_1.default.promise().query("SELECT * FROM usuarios WHERE num_id = ?", [id]);
-            if (Object.keys(usuarios).length > 0) {
-                return res.json(usuarios[0]);
+            const horario = yield database_1.default.promise().query("SELECT * FROM horario WHERE id_horario = ?", [id]);
+            if (Object.keys(horario).length > 0) {
+                return res.json(horario[0]);
             }
             res.status(404).json({
-                text: "usuario no exite"
+                text: "horario no exite"
             });
-            console.log(usuarios);
+            console.log(horario);
         });
     }
 }
-const usuariosController = new UsuariosController();
-exports.default = usuariosController;
+const horariosController = new HorariosController();
+exports.default = horariosController;

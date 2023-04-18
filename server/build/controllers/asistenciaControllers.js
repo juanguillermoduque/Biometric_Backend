@@ -31,13 +31,13 @@ class AsistenciasController {
     update(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const { id } = req.params;
-            yield database_1.default.promise().query('UPDATE asistencias SET ? WHERE idasistencia = ?', [req.body, id]);
+            yield database_1.default.promise().query('UPDATE asistencias SET ? WHERE id_asistencia = ?', [req.body, id]);
         });
     }
     getOne(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const { id } = req.params;
-            const asistencias = yield database_1.default.promise().query("SELECT * FROM asistencias WHERE idasistencia = ?", [id]);
+            const asistencias = yield database_1.default.promise().query("SELECT * FROM asistencias WHERE id_asistencia = ?", [id]);
             if (Object.keys(asistencias).length > 0) {
                 return res.json(asistencias[0]);
             }
