@@ -10,7 +10,7 @@ import usuariosRoutes from './routes/usuariosRoutes';
 import competenciaRoutes from './routes/competenciaRoutes';
 import horarioRoutes from './routes/horarioRoutes';
 import excusaRoutes from './routes/excusaRoutes';
-
+import loginRoutes from './routes/loginRoutes';
 
 //se crea la clase server, la cual servira de main, para ejecutar la aplicación
 class Server{
@@ -44,6 +44,7 @@ class Server{
         this.app.use('/api/competencias', competenciaRoutes)
         this.app.use('/api/horarios',horarioRoutes);
         this.app.use('/api/excusas',excusaRoutes);
+        this.app.use('/api/login',loginRoutes);
     }
     start(){
         //se ejecuta el metodo listen, el cual es el encargado de poner a correr el servidor
@@ -53,7 +54,7 @@ class Server{
     }
 }
 
-//se crea instancia de la clase y se ejecuta servidor llamando al metodo start
+//se crea instancia de  la clase y se ejecuta servidor llamando al metodo start
 const server = new Server();
 server.start();
 

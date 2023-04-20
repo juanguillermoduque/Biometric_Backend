@@ -14,6 +14,7 @@ const usuariosRoutes_1 = __importDefault(require("./routes/usuariosRoutes"));
 const competenciaRoutes_1 = __importDefault(require("./routes/competenciaRoutes"));
 const horarioRoutes_1 = __importDefault(require("./routes/horarioRoutes"));
 const excusaRoutes_1 = __importDefault(require("./routes/excusaRoutes"));
+const loginRoutes_1 = __importDefault(require("./routes/loginRoutes"));
 //se crea la clase server, la cual servira de main, para ejecutar la aplicación
 class Server {
     constructor() {
@@ -39,6 +40,7 @@ class Server {
         this.app.use('/api/competencias', competenciaRoutes_1.default);
         this.app.use('/api/horarios', horarioRoutes_1.default);
         this.app.use('/api/excusas', excusaRoutes_1.default);
+        this.app.use('/api/login', loginRoutes_1.default);
     }
     start() {
         //se ejecuta el metodo listen, el cual es el encargado de poner a correr el servidor
@@ -47,6 +49,6 @@ class Server {
         });
     }
 }
-//se crea instancia de la clase y se ejecuta servidor llamando al metodo start
+//se crea instancia de  la clase y se ejecuta servidor llamando al metodo start
 const server = new Server();
 server.start();
