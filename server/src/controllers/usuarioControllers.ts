@@ -23,7 +23,7 @@ class UsuariosController{
         const {id} = req.params;
         const usuarios = await db.promise().query("SELECT * FROM usuarios WHERE num_id = ?",[id]);
         if(Object.keys(usuarios).length > 0){
-            return res.json(usuarios[0]);
+            return res.json((usuarios[0])[0]);
         }
         res.status(404).json({
             text: "usuario no exite"

@@ -23,7 +23,7 @@ class AsistenciasController{
         const {id} = req.params;
         const asistencias = await db.promise().query("SELECT * FROM asistencias WHERE id_asistencia = ?",[id]);
         if(Object.keys(asistencias).length > 0){
-            return res.json(asistencias[0]);
+            return res.json((asistencias[0])[0]);
         }
         res.status(404).json({
             text: "asistencia no exite"

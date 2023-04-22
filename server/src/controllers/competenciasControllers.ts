@@ -23,7 +23,7 @@ class CompetenciasController{
         const {id} = req.params;
         const competencias = await db.promise().query("SELECT * FROM competencias WHERE id_competencia = ?",[id]);
         if(Object.keys(competencias).length > 0){
-            return res.json(competencias[0]);
+            return res.json((competencias[0])[0]);
         }
         res.status(404).json({
             text: "competencia no exite"

@@ -23,7 +23,7 @@ class HorariosController{
         const {id} = req.params;
         const horario = await db.promise().query("SELECT * FROM horario WHERE id_horario = ?",[id]);
         if(Object.keys(horario).length > 0){
-            return res.json(horario[0]);
+            return res.json((horario[0])[0]);
         }
         res.status(404).json({
             text: "horario no exite"

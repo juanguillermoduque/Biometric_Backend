@@ -25,7 +25,7 @@ class FichasController{
         const ficha = await db.promise().query("SELECT * FROM fichas WHERE code_ficha = ?",[id]);
         
         if( Object.keys(ficha).length > 0){
-            return res.json(ficha[0]);
+            return res.json((ficha[0])[0]);
         }
         res.status(404).json({
             text: "Ficha no exite"

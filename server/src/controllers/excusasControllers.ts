@@ -23,7 +23,7 @@ class ExcusasController{
         const {id} = req.params;
         const excusa = await db.promise().query("SELECT * FROM excusa WHERE id_excusa = ?",[id]);
         if(Object.keys(excusa).length > 0){
-            return res.json(excusa[0]);
+            return res.json((excusa[0])[0]);
         }
         res.status(404).json({
             text: "excusa no exite"
