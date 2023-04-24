@@ -45,6 +45,7 @@ class Server{
         this.app.use('/api/horarios',horarioRoutes);
         this.app.use('/api/excusas',excusaRoutes);
         this.app.use('/api/login',loginRoutes);
+        this.app.use('/api/roles',loginRoutes);
     }
     start(){
         //se ejecuta el metodo listen, el cual es el encargado de poner a correr el servidor
