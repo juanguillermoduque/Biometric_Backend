@@ -5,7 +5,7 @@ USE biometric;
 
 CREATE TABLE roles(
     id_rol BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    nombre_rol VARCHAR(100)
+    nombre_rol VARCHAR(100) UNIQUE
 );
 
 INSERT INTO roles(nombre_rol) values ('ADMIN');
