@@ -43,7 +43,7 @@ class FichasController {
                 return res.json((ficha[0])[0]);
             }
             res.status(404).json({
-                text: "Ficha no exite"
+                text: "Ficha no existe"
             });
             console.log(ficha.body);
         });

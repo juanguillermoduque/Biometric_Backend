@@ -13,7 +13,8 @@ import excusaRoutes from './routes/excusaRoutes';
 import loginRoutes from './routes/loginRoutes';
 import rolesRoutes from './routes/rolesRoutes';
 import componenteRoutes from './routes/componenteRoutes';
-
+import filtrosBusqueda from './routes/filtrosBusqueda';
+ 
 //se crea la clase server, la cual servira de main, para ejecutar la aplicación
 class Server{
 
@@ -37,7 +38,7 @@ class Server{
         this.app.use(express.json());
         this.app.use(express.urlencoded({extended: false}));
     }
-
+ 
     //routes contiene todas las rutas a las que accedera el front
     routes(): void{
         this.app.use('/api/fichas',fichasRoutes);
@@ -49,6 +50,7 @@ class Server{
         this.app.use('/api/login',loginRoutes);
         this.app.use('/api/roles',rolesRoutes);
         this.app.use('/api/componentes',componenteRoutes);
+        this.app.use('/api/filtros/',filtrosBusqueda);
     }
     start(){
         //se ejecuta el metodo listen, el cual es el encargado de poner a correr el servidor
