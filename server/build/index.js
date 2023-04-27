@@ -18,6 +18,7 @@ const loginRoutes_1 = __importDefault(require("./routes/loginRoutes"));
 const rolesRoutes_1 = __importDefault(require("./routes/rolesRoutes"));
 const componenteRoutes_1 = __importDefault(require("./routes/componenteRoutes"));
 const filtrosBusqueda_1 = __importDefault(require("./routes/filtrosBusqueda"));
+const usuarioRolesRoutes_1 = __importDefault(require("./routes/usuarioRolesRoutes"));
 //se crea la clase server, la cual servira de main, para ejecutar la aplicación
 class Server {
     constructor() {
@@ -47,6 +48,7 @@ class Server {
         this.app.use('/api/roles', rolesRoutes_1.default);
         this.app.use('/api/componentes', componenteRoutes_1.default);
         this.app.use('/api/filtros/', filtrosBusqueda_1.default);
+        this.app.use('/api/usuario_rol', usuarioRolesRoutes_1.default);
     }
     start() {
         //se ejecuta el metodo listen, el cual es el encargado de poner a correr el servidor

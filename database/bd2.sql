@@ -51,6 +51,15 @@ CREATE TABLE usuarios(
 INSERT INTO usuarios (num_id,first_name,last_name,type_id,email,estado,password,biometric_date) 
 values (1,'Juan','Duque','CE','Hola@hola','ACTIVO','sena',1);
 
+CREATE TABLE usuario_roles(
+    id_usuario_roles BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    id_usuario BIGINT UNSIGNED,
+    id_rol BIGINT UNSIGNED,
+    FOREIGN KEY(id_usuario) REFERENCES usuarios(num_id),
+    FOREIGN KEY(id_rol) REFERENCES roles(id_rol)
+);
+INSERT INTO usuario_roles(id_usuario,id_rol) values (1,1);
+
 CREATE TABLE fichas(
     id_ficha BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     code_ficha BIGINT UNSIGNED UNIQUE NOT NULL, 

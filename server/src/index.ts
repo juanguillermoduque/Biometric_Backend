@@ -14,6 +14,7 @@ import loginRoutes from './routes/loginRoutes';
 import rolesRoutes from './routes/rolesRoutes';
 import componenteRoutes from './routes/componenteRoutes';
 import filtrosBusqueda from './routes/filtrosBusqueda';
+import usuarioRolesRoutes from './routes/usuarioRolesRoutes';
  
 //se crea la clase server, la cual servira de main, para ejecutar la aplicación
 class Server{
@@ -51,6 +52,7 @@ class Server{
         this.app.use('/api/roles',rolesRoutes);
         this.app.use('/api/componentes',componenteRoutes);
         this.app.use('/api/filtros/',filtrosBusqueda);
+        this.app.use('/api/usuario_rol',usuarioRolesRoutes);
     }
     start(){
         //se ejecuta el metodo listen, el cual es el encargado de poner a correr el servidor
