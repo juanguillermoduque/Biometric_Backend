@@ -1,5 +1,5 @@
 import { Router } from 'express';
-
+import validateToken from '../controllers/validateTokenController';
 import usuariosController from '../controllers/usuarioControllers';
 
 
@@ -11,10 +11,10 @@ class UsuariosRoutes{
    }
 
    config():void{
-    this.router.get('/',usuariosController.list);
-    this.router.post('/',usuariosController.create);
-    this.router.put('/editar:id',usuariosController.update);
-    this.router.get('/:id',usuariosController.getOne);
+    this.router.get('/',validateToken,usuariosController.list);
+    this.router.post('/',validateToken,usuariosController.create);
+    this.router.put('/editar:id',validateToken,usuariosController.update);
+    this.router.get('/:id',validateToken,usuariosController.getOne);
    }
 }
 

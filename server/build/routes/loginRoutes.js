@@ -12,7 +12,6 @@ class LoginRoutes {
     }
     config() {
         this.router.post('/', loginControllers_1.default.auth);
-        this.router.post('/test', loginControllers_1.default.verifyToken);
     }
 }
 const loginRoutes = new LoginRoutes();

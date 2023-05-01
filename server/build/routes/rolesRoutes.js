@@ -4,6 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
+const validateTokenController_1 = __importDefault(require("../controllers/validateTokenController"));
 const rolesControllers_1 = __importDefault(require("../controllers/rolesControllers"));
 class RolesRoutes {
     constructor() {
@@ -11,14 +12,14 @@ class RolesRoutes {
         this.config();
     }
     config() {
-        this.router.get('/', rolesControllers_1.default.list);
-        this.router.post('/', rolesControllers_1.default.create);
-        this.router.put('/editar:id', rolesControllers_1.default.update);
-        this.router.get('/:name', rolesControllers_1.default.getOne);
-        this.router.post('/componentes_roles', rolesControllers_1.default.create_componentes_roles);
-        this.router.put('/componentes_roles/editar:id', rolesControllers_1.default.update_componentes_roles);
-        this.router.get('/componentes_roles:id', rolesControllers_1.default.getOne_componentes_roles);
-        this.router.get('/componentes', rolesControllers_1.default.listComponent);
+        this.router.get('/', validateTokenController_1.default, rolesControllers_1.default.list);
+        this.router.post('/', validateTokenController_1.default, rolesControllers_1.default.create);
+        this.router.put('/editar:id', validateTokenController_1.default, rolesControllers_1.default.update);
+        this.router.get('/:name', validateTokenController_1.default, rolesControllers_1.default.getOne);
+        this.router.post('/componentes_roles', validateTokenController_1.default, rolesControllers_1.default.create_componentes_roles);
+        this.router.put('/componentes_roles/editar:id', validateTokenController_1.default, rolesControllers_1.default.update_componentes_roles);
+        this.router.get('/componentes_roles:id', validateTokenController_1.default, rolesControllers_1.default.getOne_componentes_roles);
+        this.router.get('/componentes', validateTokenController_1.default, rolesControllers_1.default.listComponent);
     }
 }
 const rolesRoutes = new RolesRoutes();

@@ -1,4 +1,3 @@
-
 import { Router } from 'express';
 import loginController from '../controllers/loginControllers';
 
@@ -11,7 +10,6 @@ class LoginRoutes{
 
    config():void{
     this.router.post('/',loginController.auth);
-    this.router.post('/test',loginController.verifyToken);
    }
 
 

@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import horariosController from '../controllers/horariosControllers';
-
+import validateToken from '../controllers/validateTokenController';
 
 class HorarioRoutes{
    public router : Router = Router();
@@ -10,10 +10,10 @@ class HorarioRoutes{
    }
 
    config():void{
-    this.router.get('/',horariosController.list);
-    this.router.post('/',horariosController.create);
-    this.router.put('/editar:id',horariosController.update);
-    this.router.get('/:id',horariosController.getOne);
+    this.router.get('/',validateToken,horariosController.list);
+    this.router.post('/',validateToken,horariosController.create);
+    this.router.put('/editar:id',validateToken,horariosController.update);
+    this.router.get('/:id',validateToken,horariosController.getOne);
    }
 }
 

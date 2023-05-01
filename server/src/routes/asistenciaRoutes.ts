@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import asistenciaController from '../controllers/asistenciaControllers';
-
+import validateToken from '../controllers/validateTokenController';
 
 class AsistenciaRoutes{
    public router : Router = Router();
@@ -10,10 +10,10 @@ class AsistenciaRoutes{
    }
 
    config():void{
-    this.router.get('/',asistenciaController.list);
-    this.router.post('/',asistenciaController.create);
-    this.router.put('/editar:id',asistenciaController.update);
-    this.router.get('/:id',asistenciaController.getOne);
+    this.router.get('/',validateToken,asistenciaController.list);
+    this.router.post('/',validateToken,asistenciaController.create);
+    this.router.put('/editar:id',validateToken,asistenciaController.update);
+    this.router.get('/:id',validateToken,asistenciaController.getOne);
    }
 }
 

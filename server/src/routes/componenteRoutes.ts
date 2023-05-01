@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import componentesControllers from '../controllers/componentesControllers';
+import validateToken from '../controllers/validateTokenController';
 
 class ComponenteRoutes{
    public router : Router = Router();
@@ -9,7 +10,7 @@ class ComponenteRoutes{
    }
 
    config():void{
-    this.router.get('/',componentesControllers.list);
+    this.router.get('/',validateToken,componentesControllers.list);
 
    }
 }

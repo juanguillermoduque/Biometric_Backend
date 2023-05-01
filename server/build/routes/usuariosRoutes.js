@@ -4,6 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
+const validateTokenController_1 = __importDefault(require("../controllers/validateTokenController"));
 const usuarioControllers_1 = __importDefault(require("../controllers/usuarioControllers"));
 class UsuariosRoutes {
     constructor() {
@@ -11,10 +12,10 @@ class UsuariosRoutes {
         this.config();
     }
     config() {
-        this.router.get('/', usuarioControllers_1.default.list);
-        this.router.post('/', usuarioControllers_1.default.create);
-        this.router.put('/editar:id', usuarioControllers_1.default.update);
-        this.router.get('/:id', usuarioControllers_1.default.getOne);
+        this.router.get('/', validateTokenController_1.default, usuarioControllers_1.default.list);
+        this.router.post('/', validateTokenController_1.default, usuarioControllers_1.default.create);
+        this.router.put('/editar:id', validateTokenController_1.default, usuarioControllers_1.default.update);
+        this.router.get('/:id', validateTokenController_1.default, usuarioControllers_1.default.getOne);
     }
 }
 const usuariosRoutes = new UsuariosRoutes();

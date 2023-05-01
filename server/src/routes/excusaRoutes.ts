@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import excusasController from '../controllers/excusasControllers';
-
+import validateToken from '../controllers/validateTokenController';
 
 class ExcusaRoutes{
    public router : Router = Router();
@@ -10,10 +10,10 @@ class ExcusaRoutes{
    }
 
    config():void{
-    this.router.get('/',excusasController.list);
-    this.router.post('/',excusasController.create);
-    this.router.put('/editar:id',excusasController.update);
-    this.router.get('/:id',excusasController.getOne);
+    this.router.get('/',validateToken,excusasController.list);
+    this.router.post('/',validateToken,excusasController.create);
+    this.router.put('/editar:id',validateToken,excusasController.update);
+    this.router.get('/:id',validateToken,excusasController.getOne);
    }
 }
 

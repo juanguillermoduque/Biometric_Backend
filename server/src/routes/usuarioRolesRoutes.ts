@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import usuariosRolesControllers from '../controllers/usuarioRolesControllers';
+import validateToken from '../controllers/validateTokenController';
 
 class UsuarioRolesRoutes{
    public router : Router = Router();
@@ -8,7 +9,7 @@ class UsuarioRolesRoutes{
    }
 
    config():void{
-    this.router.post('/',usuariosRolesControllers.create);
+    this.router.post('/',validateToken,usuariosRolesControllers.create);
    }
 }
 

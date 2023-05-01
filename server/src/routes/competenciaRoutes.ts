@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import competenciasController from '../controllers/competenciasControllers';
-
+import validateToken from '../controllers/validateTokenController';
 
 class CompetenciaRoutes{
    public router : Router = Router();
@@ -10,10 +10,10 @@ class CompetenciaRoutes{
    }
 
    config():void{
-    this.router.get('/',competenciasController.list);
-    this.router.post('/',competenciasController.create);
-    this.router.put('/editar:id',competenciasController.update);
-    this.router.get('/:id',competenciasController.getOne);
+    this.router.get('/',validateToken,competenciasController.list);
+    this.router.post('/',validateToken,competenciasController.create);
+    this.router.put('/editar:id',validateToken,competenciasController.update);
+    this.router.get('/:id',validateToken,competenciasController.getOne);
    }
 }
 
