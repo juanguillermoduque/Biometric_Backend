@@ -22,7 +22,7 @@ class LoginController{
                 });
                 res.json(token);
             }else{
-                res.status(404).json({
+                res.status(401).json({
                     msg: "Usuario o clave Incorrectas"
                 })
             }
