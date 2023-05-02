@@ -16,7 +16,7 @@ const validateToken = (req:Request,res:Response,next:NextFunction)=>{
             }) 
         }
     }else{
-        res.sendStatus(401).json({
+        res.status(401).json({
             msg:'Acceso denegado' 
         }
         )
