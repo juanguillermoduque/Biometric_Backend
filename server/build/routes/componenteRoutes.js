@@ -13,6 +13,10 @@ class ComponenteRoutes {
     }
     config() {
         this.router.get('/', validateTokenController_1.default, componentesControllers_1.default.list);
+        this.router.post('/componentes_roles', validateTokenController_1.default, componentesControllers_1.default.create_componentes_roles);
+        this.router.put('/componentes_roles/editar:id', validateTokenController_1.default, componentesControllers_1.default.update_componentes_roles);
+        this.router.get('/componentes_roles:id', validateTokenController_1.default, componentesControllers_1.default.getOne_componentes_roles);
+        this.router.get('/:id', validateTokenController_1.default, componentesControllers_1.default.get_componentes);
     }
 }
 const componenteRoutes = new ComponenteRoutes();

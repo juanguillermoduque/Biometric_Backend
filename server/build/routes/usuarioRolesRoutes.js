@@ -13,6 +13,7 @@ class UsuarioRolesRoutes {
     }
     config() {
         this.router.post('/', validateTokenController_1.default, usuarioRolesControllers_1.default.create);
+        this.router.get('/:id', validateTokenController_1.default, usuarioRolesControllers_1.default.getOne);
     }
 }
 const usuarioRolesRoutes = new UsuarioRolesRoutes();

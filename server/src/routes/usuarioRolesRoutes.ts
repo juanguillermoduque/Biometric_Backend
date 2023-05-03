@@ -10,6 +10,7 @@ class UsuarioRolesRoutes{
 
    config():void{
     this.router.post('/',validateToken,usuariosRolesControllers.create);
+    this.router.get('/:id',validateToken,usuariosRolesControllers.getOne);
    }
 }
 

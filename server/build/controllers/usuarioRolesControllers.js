@@ -22,6 +22,19 @@ class UsuariosRolesControllers {
             });
         });
     }
+    getOne(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const { id } = req.params;
+            const usuarios_roles = yield database_1.default.promise().query("SELECT * FROM usuario_roles WHERE id_usuario = ?", [id]);
+            if (Object.keys(usuarios_roles).length > 0) {
+                return res.json((usuarios_roles[0])[0]);
+            }
+            res.status(404).json({
+                text: "usuario no exite"
+            });
+            console.log(usuarios_roles);
+        });
+    }
 }
 const usuariosRolesControllers = new UsuariosRolesControllers();
 exports.default = usuariosRolesControllers;

@@ -1,19 +1,26 @@
 # Biometric_Backend
 
-
-Dependencias
+Dependencias que solicitan instalación
 -nodemon
--mysql2
 -tsc
 
-Instalar paquetes de node con npm install
+installar nodemon:
 
-installar nodemon npm i nodemon
+    npm i nodemon
 
-installar mysql2 npm i mysql2
+installar tsc:
+
+    npm i typescript
 
 
+Para lograr la ejecucion del projesto se realiza el siguiente comando:
 
-correr building de javascript con npm run build
+    cd server/
 
-correr proyecto con npm run dev
+    npm run dev
+
+Para realizar modificaciones y correr el building de javaScript se realiza el siguente comando desde una terminal nueva:
+
+    cd server/
+
+    npm run build

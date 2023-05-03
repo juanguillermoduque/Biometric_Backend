@@ -16,10 +16,7 @@ class RolesRoutes {
         this.router.post('/', validateTokenController_1.default, rolesControllers_1.default.create);
         this.router.put('/editar:id', validateTokenController_1.default, rolesControllers_1.default.update);
         this.router.get('/:name', validateTokenController_1.default, rolesControllers_1.default.getOne);
-        this.router.post('/componentes_roles', validateTokenController_1.default, rolesControllers_1.default.create_componentes_roles);
-        this.router.put('/componentes_roles/editar:id', validateTokenController_1.default, rolesControllers_1.default.update_componentes_roles);
-        this.router.get('/componentes_roles:id', validateTokenController_1.default, rolesControllers_1.default.getOne_componentes_roles);
-        this.router.get('/componentes', validateTokenController_1.default, rolesControllers_1.default.listComponent);
+        this.router.get('/id:id', validateTokenController_1.default, rolesControllers_1.default.getOneId);
     }
 }
 const rolesRoutes = new RolesRoutes();
