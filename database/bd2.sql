@@ -9,6 +9,7 @@ CREATE TABLE roles(
 );
 
 INSERT INTO roles(nombre_rol) values ('ADMIN');
+INSERT INTO roles(nombre_rol) values ('INSTRUCTOR');
 
 CREATE TABLE componentes(
     id_componente BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
@@ -29,7 +30,7 @@ CREATE TABLE componentes_roles(
 
 INSERT INTO componentes_roles(id_rol , id_componente) values (1,1),(1,2),(1,3),(1,4),(1,5),
 (1,6),(1,7);
-
+INSERT INTO componentes_roles(id_rol , id_componente) values (2,1),(2,2),(2,3),(2,4),(2,5);
 
 CREATE TABLE usuarios( 
     num_id BIGINT UNSIGNED UNIQUE NOT NULL PRIMARY KEY,
@@ -45,7 +46,8 @@ CREATE TABLE usuarios(
 );
 
 INSERT INTO usuarios (num_id,first_name,last_name,type_id,email,estado,password,biometric_date) 
-values (1,'Juan','Duque','CE','Hola@hola','ACTIVO','sena',1);
+values (1,'Juan','Duque','CE','Hola@hola','ACTIVO','sena',1), 
+(2,'Daryana','Robles','CC','dary@hola','ACTIVO','sena123',2);
 
 CREATE TABLE usuario_roles(
     id_usuario_roles BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
@@ -55,6 +57,7 @@ CREATE TABLE usuario_roles(
     FOREIGN KEY(id_rol) REFERENCES roles(id_rol)
 );
 INSERT INTO usuario_roles(id_usuario,id_rol) values (1,1);
+INSERT INTO usuario_roles(id_usuario,id_rol) values (2,2);
 
 CREATE TABLE fichas(
     id_ficha BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,

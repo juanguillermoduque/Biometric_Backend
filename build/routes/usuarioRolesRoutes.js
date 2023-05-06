@@ -14,6 +14,7 @@ class UsuarioRolesRoutes {
     config() {
         this.router.post('/', validateTokenController_1.default, usuarioRolesControllers_1.default.create);
         this.router.get('/:id', validateTokenController_1.default, usuarioRolesControllers_1.default.getOne);
+        this.router.get('/rol-instructor', validateTokenController_1.default, usuarioRolesControllers_1.default.getRolesInstructor);
     }
 }
 const usuarioRolesRoutes = new UsuarioRolesRoutes();

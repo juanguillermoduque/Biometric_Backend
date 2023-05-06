@@ -30,9 +30,22 @@ class UsuariosRolesControllers {
                 return res.json((usuarios_roles[0])[0]);
             }
             res.status(404).json({
-                text: "usuario no exite"
+                text: "usuario no existe"
             });
             console.log(usuarios_roles);
+        });
+    }
+    getRolesInstructor(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const id = 2;
+            const instructores = yield database_1.default.promise().query("SELECT * FROM usuario_roles WHERE id_rol = 2");
+            if (Object.keys(instructores).length > 0) {
+                return res.json((instructores[0]));
+            }
+            res.status(404).json({
+                text: "usuario no existe"
+            });
+            console.log(instructores);
         });
     }
 }

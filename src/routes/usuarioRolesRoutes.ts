@@ -11,6 +11,7 @@ class UsuarioRolesRoutes{
    config():void{
     this.router.post('/',validateToken,usuariosRolesControllers.create);
     this.router.get('/:id',validateToken,usuariosRolesControllers.getOne);
+    this.router.get('/rol-instructor',validateToken,usuariosRolesControllers.getRolesInstructor);
    }
 }
 
