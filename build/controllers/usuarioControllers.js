@@ -53,7 +53,7 @@ class UsuariosController {
             const { password } = req.body;
             yield database_1.default.promise().query('UPDATE usuarios SET password = ? WHERE num_id = ?', [password, id]);
             res.json({
-                message: 'Contraseña actualizada'
+                message: 'Contraseña ya actualizada'
             });
         });
     }
