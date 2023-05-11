@@ -47,6 +47,16 @@ class UsuariosController {
             console.log(usuarios);
         });
     }
+    updatePassword(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const { id } = req.params;
+            const { password } = req.body;
+            yield database_1.default.promise().query('UPDATE usuarios SET password = ? WHERE num_id = ?', [password, id]);
+            res.json({
+                message: 'Contraseña actualizada'
+            });
+        });
+    }
 }
 const usuariosController = new UsuariosController();
 exports.default = usuariosController;
