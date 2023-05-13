@@ -12,7 +12,9 @@ class InstructorRoutes {
         this.config();
     }
     config() {
+        this.router.post(''); //get: ver en la base de datos, post: insertar en la base de datos
         this.router.get('/instructor', validateTokenController_1.default, instructoresController_1.default.getRolesInstructor);
+        this.router.post('/fichainstructor', validateTokenController_1.default, instructoresController_1.default.createFichaInstructor);
     }
 }
 const instructorRoutes = new InstructorRoutes();

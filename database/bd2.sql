@@ -68,6 +68,9 @@ CREATE TABLE fichas(
     created_at TIMESTAMP NULL,
     updated_at TIMESTAMP NULL
 );
+INSERT INTO fichas(code_ficha, name_ficha) values (2465417, 'ADSO');
+INSERT INTO fichas(code_ficha, name_ficha) values (2476528, 'ADSI');
+INSERT INTO fichas(code_ficha, name_ficha) values (2400510, 'ADSO');
 
 CREATE TABLE competencias(
     id_competencia BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
@@ -76,8 +79,8 @@ CREATE TABLE competencias(
     FOREIGN KEY(id_ficha) REFERENCES fichas(id_ficha)
 );
 
-CREATE TABLE ficha_Instructor(
-    id_ficha_Instructor BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+CREATE TABLE ficha_instructor(
+    id_ficha_instructor BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     id_ficha BIGINT UNSIGNED,
     id_instructor BIGINT UNSIGNED,
     FOREIGN KEY(id_ficha) REFERENCES fichas(id_ficha),

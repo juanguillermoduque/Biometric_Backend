@@ -9,7 +9,9 @@ class InstructorRoutes{
    }
 
    config():void{
+    this.router.post('') //get: ver en la base de datos, post: insertar en la base de datos
     this.router.get('/instructor',validateToken,instructoresControllers.getRolesInstructor);
+    this.router.post('/fichainstructor',validateToken,instructoresControllers.createFichaInstructor);
    }
 }
 

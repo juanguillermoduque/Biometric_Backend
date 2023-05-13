@@ -8,6 +8,13 @@ class InstructoresControllers{
             return res.json((instructores[0])[0]);
         }
     }
+   
+    public async createFichaInstructor(req:Request,res:Response):Promise<void>{
+        await db.promise().query('INSERT INTO ficha_instructor SET ? ',[req.body]);
+        res.json({
+            message:"El instructor/a ha sido vinculado correctamente a la ficha"
+        });
+    }    
 }
 
 const instructoresControllers = new InstructoresControllers();
