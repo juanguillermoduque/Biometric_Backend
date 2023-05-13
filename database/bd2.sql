@@ -56,6 +56,14 @@ CREATE TABLE usuario_roles(
 );
 INSERT INTO usuario_roles(id_usuario,id_rol) values (1,1);
 
+CREATE TABLE programas(
+    id_programa BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY, 
+    name_programa VARCHAR(50) NOT NULL     
+);
+
+INSERT INTO programas(name_programa) values ('Analisis y desarrollo de Software'),('Produccion multimedia'),('Confecciones'),
+('Soldadura'),('Construcciones');
+
 CREATE TABLE fichas(
     id_ficha BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     code_ficha BIGINT UNSIGNED UNIQUE NOT NULL, 
@@ -67,13 +75,7 @@ CREATE TABLE fichas(
     FOREIGN KEY(id_programa) REFERENCES programas(id_programa)
 );
 
-CREATE TABLE programas(
-    id_programa BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY, 
-    name_programa VARCHAR(50) NOT NULL     
-);
 
-INSERT INTO programas(name_programa) values ('Analisis y desarrollo de Software'),('Produccion multimedia'),('Confecciones'),
-('Soldadura'),('Construcciones');
 
 CREATE TABLE competencias(
     id_competencia BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
