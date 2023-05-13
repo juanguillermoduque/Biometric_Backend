@@ -26,7 +26,7 @@ class HorariosController{
             return res.json((horario[0])[0]);
         }
         res.status(404).json({
-            text: "horario no exite"
+            text: "horario no existe"
         });
         console.log(horario);
     }

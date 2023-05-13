@@ -26,7 +26,7 @@ class AsistenciasController{
             return res.json((asistencias[0])[0]);
         }
         res.status(404).json({
-            text: "asistencia no exite"
+            text: "asistencia no existe"
         }); 
         console.log(asistencias);
     }
