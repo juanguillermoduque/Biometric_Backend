@@ -3,7 +3,7 @@ export default{
     database:{
         host: 'localhost',
         user: 'root',
-        password: 'sena123',
+        password: '12345678',
         database: 'biometric',
         port:3306
     }

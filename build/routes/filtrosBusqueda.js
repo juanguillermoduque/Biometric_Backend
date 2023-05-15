@@ -12,7 +12,11 @@ class FiltrosRoutes {
         this.config();
     }
     config() {
-        this.router.get('/search:id', validateTokenController_1.default, filtrosBusquedaController_1.default.search);
+        this.router.get('/searchFicha:id', validateTokenController_1.default, filtrosBusquedaController_1.default.searchFicha);
+        this.router.get('/searchUser:filtro', validateTokenController_1.default, filtrosBusquedaController_1.default.searchUsuario);
+        this.router.get('/searchHorario:filter', validateTokenController_1.default, filtrosBusquedaController_1.default.searchHorario);
+        this.router.get('/searchAsistencia:filter', validateTokenController_1.default, filtrosBusquedaController_1.default.searchAsistencia);
+        this.router.get('/searchExcusa:filter', validateTokenController_1.default, filtrosBusquedaController_1.default.searchExcusa);
     }
 }
 const filtrosRoutes = new FiltrosRoutes();
