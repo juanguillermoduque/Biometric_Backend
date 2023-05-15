@@ -9,6 +9,7 @@ CREATE TABLE roles(
 );
 
 INSERT INTO roles(nombre_rol) values ('ADMIN');
+INSERT INTO roles(nombre_rol) values ('INSTRUCTOR');
 
 CREATE TABLE componentes(
     id_componente BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
@@ -29,7 +30,7 @@ CREATE TABLE componentes_roles(
 
 INSERT INTO componentes_roles(id_rol , id_componente) values (1,1),(1,2),(1,3),(1,4),(1,5),
 (1,6),(1,7);
-
+INSERT INTO componentes_roles(id_rol , id_componente) values (2,1),(2,2),(2,3),(2,4),(2,5);
 
 CREATE TABLE usuarios( 
     num_id BIGINT UNSIGNED UNIQUE NOT NULL PRIMARY KEY,
@@ -45,7 +46,8 @@ CREATE TABLE usuarios(
 );
 
 INSERT INTO usuarios (num_id,first_name,last_name,type_id,email,estado,password,biometric_date) 
-values (1,'Juan','Duque','CE','Hola@hola','ACTIVO','sena',1);
+values (1,'Juan','Duque','CE','Hola@hola','ACTIVO','sena',1), 
+(2,'Daryana','Robles','CC','dary@hola','ACTIVO','sena123',2);
 
 CREATE TABLE usuario_roles(
     id_usuario_roles BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
@@ -55,6 +57,7 @@ CREATE TABLE usuario_roles(
     FOREIGN KEY(id_rol) REFERENCES roles(id_rol)
 );
 INSERT INTO usuario_roles(id_usuario,id_rol) values (1,1);
+INSERT INTO usuario_roles(id_usuario,id_rol) values (2,2);
 
 CREATE TABLE programas(
     id_programa BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY, 
@@ -74,6 +77,9 @@ CREATE TABLE fichas(
     updated_at TIMESTAMP NULL,
     FOREIGN KEY(id_programa) REFERENCES programas(id_programa)
 );
+INSERT INTO fichas(code_ficha, name_ficha) values (2465417, 'ADSO');
+INSERT INTO fichas(code_ficha, name_ficha) values (2476528, 'ADSI');
+INSERT INTO fichas(code_ficha, name_ficha) values (2400510, 'ADSO');
 
 
 
@@ -84,8 +90,8 @@ CREATE TABLE competencias(
     FOREIGN KEY(id_ficha) REFERENCES fichas(id_ficha)
 );
 
-CREATE TABLE ficha_Instructor(
-    id_ficha_Instructor BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+CREATE TABLE ficha_instructor(
+    id_ficha_instructor BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     id_ficha BIGINT UNSIGNED,
     id_instructor BIGINT UNSIGNED,
     FOREIGN KEY(id_ficha) REFERENCES fichas(id_ficha),

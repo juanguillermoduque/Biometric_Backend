@@ -1,7 +1,7 @@
 import {Request,Response} from 'express';
 import db from '../database';
 
-class HorariosController{
+class HorariosController{ 
     public async list(req:Request,res:Response):Promise<void>{
        const horario = await db.promise().query('SELECT * FROM horario');
        res.json(horario);
