@@ -16,9 +16,16 @@ class UsuariosRolesControllers{
             return res.json((usuarios_roles[0])[0]);
         }
         res.status(404).json({
-            text: "usuario no exite"
+            text: "usuario no existe"
         });
         console.log(usuarios_roles);
+    }
+    public async getRolesInstructor(req:Request,res:Response):Promise<any>{
+        const instructores = await db.promise().query("SELECT * FROM usuario_roles WHERE id_rol = 2");
+        console.log(instructores);
+        if(Object.keys(instructores).length > 0){
+            return res.json((instructores[0]));
+        }
     }
 }
 

@@ -13,37 +13,23 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const database_1 = __importDefault(require("../database"));
-class UsuariosRolesControllers {
-    create(req, res) {
-        return __awaiter(this, void 0, void 0, function* () {
-            yield database_1.default.promise().query('INSERT INTO usuario_roles SET ?', [req.body]);
-            res.json({
-                message: "Creado"
-            });
-        });
-    }
-    getOne(req, res) {
-        return __awaiter(this, void 0, void 0, function* () {
-            const { id } = req.params;
-            const usuarios_roles = yield database_1.default.promise().query("SELECT * FROM usuario_roles WHERE id_usuario = ?", [id]);
-            if (Object.keys(usuarios_roles).length > 0) {
-                return res.json((usuarios_roles[0])[0]);
-            }
-            res.status(404).json({
-                text: "usuario no existe"
-            });
-            console.log(usuarios_roles);
-        });
-    }
+class InstructoresControllers {
     getRolesInstructor(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const instructores = yield database_1.default.promise().query("SELECT * FROM usuario_roles WHERE id_rol = 2");
-            console.log(instructores);
             if (Object.keys(instructores).length > 0) {
-                return res.json((instructores[0]));
+                return res.json((instructores[0])[0]);
             }
         });
     }
+    createFichaInstructor(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            yield database_1.default.promise().query('INSERT INTO ficha_instructor SET ? ', [req.body]);
+            res.json({
+                message: "El instructor/a ha sido vinculado a la ficha"
+            });
+        });
+    }
 }
-const usuariosRolesControllers = new UsuariosRolesControllers();
-exports.default = usuariosRolesControllers;
+const instructoresControllers = new InstructoresControllers();
+exports.default = instructoresControllers;
