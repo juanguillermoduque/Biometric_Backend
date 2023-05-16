@@ -77,9 +77,9 @@ CREATE TABLE fichas(
     updated_at TIMESTAMP NULL,
     FOREIGN KEY(id_programa) REFERENCES programas(id_programa)
 );
-INSERT INTO fichas(code_ficha, name_ficha) values (2465417, 'ADSO');
-INSERT INTO fichas(code_ficha, name_ficha) values (2476528, 'ADSI');
-INSERT INTO fichas(code_ficha, name_ficha) values (2400510, 'ADSO');
+INSERT INTO fichas(code_ficha, id_programa) values (2465417, 1);
+INSERT INTO fichas(code_ficha, id_programa) values (2476528, 2);
+INSERT INTO fichas(code_ficha, id_programa) values (2400510, 3);
 
 
 
