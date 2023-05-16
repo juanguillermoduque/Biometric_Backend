@@ -38,10 +38,10 @@ class Server{
 
         //se declara el uso de las dependencias
         this.app.use(morgan('dev'));
-        this.app.use(cors());
+        this.app.use(cors({origin: '*'}));
         this.app.use(express.json());
         this.app.use(express.urlencoded({extended: false}));
-    }
+    } 
  
     //routes contiene todas las rutas a las que accedera el front
     routes(): void{
