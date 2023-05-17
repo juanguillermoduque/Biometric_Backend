@@ -8,11 +8,16 @@ class ProgramasController{
     } 
 
     public async create(req:Request,res:Response):Promise<void>{
-        await db.promise().query("INSERT INTO programas SET ?",[req.body]);
-        console.log(req.body);
-        res.json({
-            message:"Programa agregado" 
-        });
+        try{
+            await db.promise().query("INSERT INTO programas SET ?",[req.body]);
+            console.log(req.body);
+            res.json({
+                message:"Programa agregado" 
+            });
+        }catch{
+            res.status(404).json("El programa ya existe")
+        }
+  
     } 
 
     public async update(req:Request,res:Response):Promise<void>{

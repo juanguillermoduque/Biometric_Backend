@@ -22,10 +22,15 @@ class CompetenciasController {
     }
     create(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            yield database_1.default.promise().query('INSERT INTO competencias SET ?', [req.body]);
-            res.json({
-                message: "competencias creadas"
-            });
+            try {
+                yield database_1.default.promise().query('INSERT INTO competencias SET ?', [req.body]);
+                res.json("competencias creadas");
+            }
+            catch (_a) {
+                res.status(404).json({
+                    mensaje: "Competencia ya existe"
+                });
+            }
         });
     }
     update(req, res) {

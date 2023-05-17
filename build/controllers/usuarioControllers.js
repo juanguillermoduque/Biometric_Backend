@@ -22,10 +22,14 @@ class UsuariosController {
     }
     create(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            yield database_1.default.promise().query('INSERT INTO usuarios SET ?', [req.body]);
-            res.json({
-                message: "usuarios creados"
-            });
+            try {
+                yield database_1.default.promise().query('INSERT INTO usuarios SET ?', [req.body]);
+                res.json({
+                    message: "usuarios creados"
+                });
+            }
+            catch (_a) {
+            }
         });
     }
     update(req, res) {

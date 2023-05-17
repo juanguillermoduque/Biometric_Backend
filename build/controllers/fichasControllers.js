@@ -22,11 +22,16 @@ class FichasController {
     }
     create(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            yield database_1.default.promise().query("INSERT INTO fichas SET ?", [req.body]);
-            console.log(req.body);
-            res.json({
-                message: "Ficha creada"
-            });
+            try {
+                yield database_1.default.promise().query("INSERT INTO fichas SET ?", [req.body]);
+                console.log(req.body);
+                res.json({
+                    message: "Ficha creada"
+                });
+            }
+            catch (_a) {
+                res.status(404).json("La ficha ya existe");
+            }
         });
     }
     update(req, res) {

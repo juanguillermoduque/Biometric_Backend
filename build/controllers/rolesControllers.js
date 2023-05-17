@@ -16,10 +16,15 @@ const database_1 = __importDefault(require("../database"));
 class RolesControllers {
     create(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            yield database_1.default.promise().query('INSERT INTO roles SET ?', [req.body]);
-            res.json({
-                message: "roles creados"
-            });
+            try {
+                yield database_1.default.promise().query('INSERT INTO roles SET ?', [req.body]);
+                res.json({
+                    message: "roles creados"
+                });
+            }
+            catch (e) {
+                res.status(404).json("Algo salio mal");
+            }
         });
     }
     update(req, res) {
@@ -43,10 +48,9 @@ class RolesControllers {
     getOneId(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const { id } = req.params;
-            const roles = yield database_1.default.promise().query("SELECT * FROM roles WHERE id_rol = ?", [id]);
-            console.log("se ingreso a la ufuncion");
-            if (Object.keys(roles).length > 0) {
-                return res.json((roles[0])[0]);
+            const rolesId = yield database_1.default.promise().query("SELECT * FROM roles WHERE id_rol = ?", [id]);
+            if (Object.keys(rolesId).length > 0) {
+                return res.json((rolesId[0])[0]);
             }
             res.status(404).json({
                 text: "roles no exite"
