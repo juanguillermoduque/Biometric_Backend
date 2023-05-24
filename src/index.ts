@@ -58,7 +58,6 @@ class Server{
         this.app.use('/api/usuario_rol',usuarioRolesRoutes);
         this.app.use('/api/programas',programasRoutes);
         this.app.use('/api/instructor',instructoresRoutes);
-        this.app.put('/api/usuarios/:id/password', usuariosController.updatePassword);
     }
     start(){
         //se ejecuta el metodo listen, el cual es el encargado de poner a correr el servidor
