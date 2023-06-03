@@ -5,9 +5,9 @@ class FiltrosBusqueda{
 
 public async searchFicha(req:Request,res:Response):Promise<any>{
     const {id} = req.params;
-    const fichasId = await db.promise().query("SELECT * FROM fichas WHERE code_ficha like ? or code_ficha like ? or name_ficha like ?",[id+'%','%' + id , id+'%']);
+    const fichasId = await db.promise().query("SELECT * FROM fichas WHERE code_ficha like ? or code_ficha like ? or id_programa like ?",[id+'%','%' + id , id+'%']);
     res.json(fichasId);
-}
+} 
 
 public async searchUsuario(req:Request,res:Response):Promise<any>{
     const {filtro} = req.params;
