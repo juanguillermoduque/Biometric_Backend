@@ -48,7 +48,7 @@ export default class Email { //se pone default ya que la clase va a ser lo únic
             html: `<b>
             Su correo es: ${email} y su contraseña será ${passwordNew}, por favor, cambie su contraseña
             Da click al siguiente enlace: sssssssss
-            </b>`
+            </b>` 
 
         })
     }
