@@ -116,6 +116,7 @@ CREATE TABLE asistencias(
     id_aprendiz BIGINT UNSIGNED,
     id_horario BIGINT UNSIGNED,
     hora_ingreso TIME NOT NULL,
+    hora_salida TIME NOT NULL,
     comments VARCHAR(100),
     created_at TIMESTAMP NULL,
     updated_at TIMESTAMP NULL,
