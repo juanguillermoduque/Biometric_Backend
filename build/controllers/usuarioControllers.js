@@ -13,6 +13,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const database_1 = __importDefault(require("../database"));
+const generate_password_1 = require("generate-password");
+const bcrypt_1 = __importDefault(require("bcrypt"));
+const email_1 = __importDefault(require("../helpers/email"));
 class UsuariosController {
     list(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -51,14 +54,63 @@ class UsuariosController {
             console.log(usuarios);
         });
     }
-    updatePassword(req, res) {
+    /*public async updatePassword(req: Request, res: Response): Promise<void> {
+        const { id } = req.params;
+        const { password } = req.body;
+        await db.promise().query('UPDATE usuarios SET password = ? WHERE num_id = ?', [password, id]);
+        res.json({
+          message: 'Contraseña ya actualizada'
+        });
+    }*/
+    //RECUPERAR CONSTRASEÑA
+    recuperarPassword(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const { id } = req.params;
-            const { password } = req.body;
-            yield database_1.default.promise().query('UPDATE usuarios SET password = ? WHERE num_id = ?', [password, id]);
-            res.json({
-                message: 'Contraseña ya actualizada'
-            });
+            const { email } = req.params; //se van a recuperar del request body
+            try {
+                const existEmail = yield database_1.default.promise().query("SELECT * FROM usuarios WHERE email=?", [email]);
+                if (existEmail[0][0]) {
+                    //recuperar - crear contraseña nueva 
+                    const passwordNew = (0, generate_password_1.generate)({
+                        length: 8,
+                        numbers: true,
+                        uppercase: false
+                    });
+                    //cifrar la nueva contraseña
+                    const salt = bcrypt_1.default.genSaltSync(); //por defecto, va a generar 10 saltos
+                    const iuser = bcrypt_1.default.hashSync(passwordNew, salt); //vamos a cifrar el password nuevo
+                    let pass = {
+                        password: iuser
+                    };
+                    try {
+                        const updatePassword = yield database_1.default.promise().query('UPDATE usuarios SET ? WHERE email=?', [pass, email]);
+                        console.log(updatePassword);
+                        //si se actualizó el correo correctamente, se le va a enviar un correo
+                        email_1.default.instance.enviarEmail(email, passwordNew);
+                        //enviar un mensaje, un status 200
+                        return res.status(200).json({
+                            ok: true,
+                            msg: `El correo ha sido enviado a ${email} satisfactoriamente`
+                        });
+                    }
+                    catch (_a) {
+                        return res.status(400).json({
+                            ok: false,
+                            msg: `La contraseña no se pudo actualizar`
+                        });
+                    }
+                }
+                return res.status(400).json({
+                    ok: false,
+                    msg: `El email es incorrecto`
+                });
+            }
+            catch (error) { //el catch es que el servidor no respondió, si hay un error arriba, nos va a enviar al catch
+                console.log(error);
+                return res.status(500).json({
+                    ok: true,
+                    msg: `Error en el funcionamiento del servidor`
+                });
+            }
         });
     }
 }
