@@ -39,14 +39,14 @@ class UsuariosController{
         console.log(usuarios);
     }
 
-    /*public async updatePassword(req: Request, res: Response): Promise<void> {
+    public async updatePassword(req: Request, res: Response): Promise<void> {
         const { id } = req.params;
         const { password } = req.body;
         await db.promise().query('UPDATE usuarios SET password = ? WHERE num_id = ?', [password, id]);
         res.json({
           message: 'Contraseña ya actualizada'
         });
-    }*/
+    }
 
 
     //RECUPERAR CONSTRASEÑA
