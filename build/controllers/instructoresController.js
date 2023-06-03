@@ -26,7 +26,7 @@ class InstructoresControllers {
         return __awaiter(this, void 0, void 0, function* () {
             yield database_1.default.promise().query('INSERT INTO ficha_instructor SET ? ', [req.body]);
             res.json({
-                message: "El instructor/a ha sido vinculado a la ficha"
+                message: "El instructor/a ha sido vinculado correctamente a la ficha"
             });
         });
     }

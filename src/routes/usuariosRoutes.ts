@@ -15,8 +15,9 @@ class UsuariosRoutes{
     this.router.post('/',validateToken,usuariosController.create);
     this.router.put('/editar:id',validateToken,usuariosController.update);
     this.router.get('/:id',validateToken,usuariosController.getOne);
+    this.router.post('/recuperarcontrasena:email',usuariosController.recuperarPassword);
    }
-}
+} ///:email
 
 const usuariosRoutes = new UsuariosRoutes();
 export default usuariosRoutes.router;

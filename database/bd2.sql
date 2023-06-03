@@ -46,8 +46,9 @@ CREATE TABLE usuarios(
 );
 
 INSERT INTO usuarios (num_id,first_name,last_name,type_id,email,estado,password,biometric_date) 
-values (1,'Juan','Duque','CE','Hola@hola','ACTIVO','sena',1), 
-(2,'Daryana','Robles','CC','dary@hola','ACTIVO','sena123',2);
+values (1,'Juan','Duque','CE','g.duque@utp.edu.co','ACTIVO','sena',1), 
+(2,'Daryana','Robles','CC','dary@hola','ACTIVO','sena123',2),
+(3,'Pruebas','BS','CC','pruebasbiometricservice@gmail.com','ACTIVO','biometrics2465417',3);
 
 CREATE TABLE usuario_roles(
     id_usuario_roles BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
@@ -58,6 +59,7 @@ CREATE TABLE usuario_roles(
 );
 INSERT INTO usuario_roles(id_usuario,id_rol) values (1,1);
 INSERT INTO usuario_roles(id_usuario,id_rol) values (2,2);
+INSERT INTO usuario_roles(id_usuario,id_rol) values (3,2);
 
 CREATE TABLE fichas(
     id_ficha BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
