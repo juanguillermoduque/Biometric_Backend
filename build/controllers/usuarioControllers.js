@@ -54,14 +54,16 @@ class UsuariosController {
             console.log(usuarios);
         });
     }
-    /*public async updatePassword(req: Request, res: Response): Promise<void> {
-        const { id } = req.params;
-        const { password } = req.body;
-        await db.promise().query('UPDATE usuarios SET password = ? WHERE num_id = ?', [password, id]);
-        res.json({
-          message: 'Contraseña ya actualizada'
+    updatePassword(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const { id } = req.params;
+            const { password } = req.body;
+            yield database_1.default.promise().query('UPDATE usuarios SET password = ? WHERE num_id = ?', [password, id]);
+            res.json({
+                message: 'Contraseña ya actualizada'
+            });
         });
-    }*/
+    }
     //RECUPERAR CONSTRASEÑA
     recuperarPassword(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -77,7 +79,8 @@ class UsuariosController {
                     });
                     //cifrar la nueva contraseña
                     const salt = bcrypt_1.default.genSaltSync(); //por defecto, va a generar 10 saltos
-                    const iuser = bcrypt_1.default.hashSync(passwordNew, salt); //vamos a cifrar el password nuevo
+                    //const iuser = bycript.hashSync(passwordNew, salt) //vamos a cifrar el password nuevo
+                    const iuser = bcrypt_1.default.hashSync(passwordNew, 10);
                     let pass = {
                         password: iuser
                     };

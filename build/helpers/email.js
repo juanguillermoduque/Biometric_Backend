@@ -22,9 +22,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const nodemailer_1 = __importDefault(require("nodemailer"));
 class Email {
-    static get instance() {
-        return this._instance || (this._instance = new Email());
-    }
     constructor() {
         this.transporter = nodemailer_1.default.createTransport({
             host: "smtp.gmail.com",
@@ -35,6 +32,9 @@ class Email {
                 pass: "ietabkthapjjmgba" //biometrics2465417  //ietabkthapjjmgba
             }
         });
+    }
+    static get instance() {
+        return this._instance || (this._instance = new Email());
     }
     //Verificar Email
     verificarEmail() {
@@ -50,7 +50,7 @@ class Email {
                 to: email,
                 subject: 'Recuperación de contraseña',
                 html: `<b>
-            Su correo es: ${email} y su contraseña será ${passwordNew}, por favor, cambie su contraseña
+            Su correo es: ${email} y su contraseña será ${passwordNew} , por favor, cambie su contraseña
             Da click al siguiente enlace: sssssssss
             </b>`
             });

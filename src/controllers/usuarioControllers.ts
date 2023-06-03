@@ -69,10 +69,13 @@ class UsuariosController{
                 
                 //cifrar la nueva contraseña
                 const salt = bycript.genSaltSync(); //por defecto, va a generar 10 saltos
-                const iuser = bycript.hashSync(passwordNew, salt) //vamos a cifrar el password nuevo
+                //const iuser = bycript.hashSync(passwordNew, salt) //vamos a cifrar el password nuevo
+                const iuser = bycript.hashSync(passwordNew, 10);
                 let pass = {
                     password : iuser
                 }
+
+                
                 
                 try{
                     const updatePassword  =  await db.promise().query('UPDATE usuarios SET ? WHERE email=?',[pass,email]);
