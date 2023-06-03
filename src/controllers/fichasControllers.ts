@@ -8,11 +8,15 @@ class FichasController{
     } 
 
     public async create(req:Request,res:Response):Promise<void>{
-        await db.promise().query("INSERT INTO fichas SET ?",[req.body]);
-        console.log(req.body);
-        res.json({
-            message:"Ficha creada" 
-        });
+        try{
+            await db.promise().query("INSERT INTO fichas SET ?",[req.body]);
+            console.log(req.body);
+            res.json({
+                message:"Ficha creada" 
+            });
+        }catch{
+            res.status(404).json("La ficha ya existe")
+        }
     } 
 
     public async update(req:Request,res:Response):Promise<void>{

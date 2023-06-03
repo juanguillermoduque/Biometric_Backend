@@ -13,45 +13,46 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const database_1 = __importDefault(require("../database"));
-class CompetenciasController {
+class ProgramasController {
     list(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const competencias = yield database_1.default.promise().query('SELECT * FROM competencias');
-            res.json(competencias);
+            const programas = yield database_1.default.promise().query('SELECT * FROM programas');
+            res.json(programas);
         });
     }
     create(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                yield database_1.default.promise().query('INSERT INTO competencias SET ?', [req.body]);
-                res.json("competencias creadas");
+                yield database_1.default.promise().query("INSERT INTO programas SET ?", [req.body]);
+                console.log(req.body);
+                res.json({
+                    message: "Programa agregado"
+                });
             }
             catch (_a) {
-                res.status(404).json({
-                    mensaje: "Competencia ya existe"
-                });
+                res.status(404).json("El programa ya existe");
             }
         });
     }
     update(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const { id } = req.params;
-            yield database_1.default.promise().query('UPDATE competencias SET ? WHERE id_competencia = ?', [req.body, id]);
+            yield database_1.default.promise().query('UPDATE programas SET ? WHERE id_programa = ?', [req.body, id]);
         });
     }
     getOne(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const { id } = req.params;
-            const competencias = yield database_1.default.promise().query("SELECT * FROM competencias WHERE id_competencia = ?", [id]);
-            if (Object.keys(competencias).length > 0) {
-                return res.json((competencias[0])[0]);
+            const programas = yield database_1.default.promise().query("SELECT * FROM programas WHERE id_programa = ?", [id]);
+            if (Object.keys(programas).length > 0) {
+                return res.json((programas[0])[0]);
             }
             res.status(404).json({
-                text: "competencia no exite"
+                text: "Programa no existe"
             });
-            console.log(competencias);
+            console.log(programas.body);
         });
     }
 }
-const competenciasController = new CompetenciasController();
-exports.default = competenciasController;
+const programasController = new ProgramasController();
+exports.default = programasController;

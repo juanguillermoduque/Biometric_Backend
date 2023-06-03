@@ -19,6 +19,7 @@ const rolesRoutes_1 = __importDefault(require("./routes/rolesRoutes"));
 const componenteRoutes_1 = __importDefault(require("./routes/componenteRoutes"));
 const filtrosBusqueda_1 = __importDefault(require("./routes/filtrosBusqueda"));
 const usuarioRolesRoutes_1 = __importDefault(require("./routes/usuarioRolesRoutes"));
+const programasRoutes_1 = __importDefault(require("./routes/programasRoutes"));
 const instructoresRoutes_1 = __importDefault(require("./routes/instructoresRoutes"));
 //se crea la clase server, la cual servira de main, para ejecutar la aplicación
 class Server {
@@ -33,7 +34,7 @@ class Server {
         this.app.set('port', 3000);
         //se declara el uso de las dependencias
         this.app.use((0, morgan_1.default)('dev'));
-        this.app.use((0, cors_1.default)());
+        this.app.use((0, cors_1.default)({ origin: '*' }));
         this.app.use(express_1.default.json());
         this.app.use(express_1.default.urlencoded({ extended: false }));
     }
@@ -50,8 +51,8 @@ class Server {
         this.app.use('/api/componentes', componenteRoutes_1.default);
         this.app.use('/api/filtros/', filtrosBusqueda_1.default);
         this.app.use('/api/usuario_rol', usuarioRolesRoutes_1.default);
+        this.app.use('/api/programas', programasRoutes_1.default);
         this.app.use('/api/instructor', instructoresRoutes_1.default);
-        //this.app.put('/api/usuarios/:id/password', usuariosController.updatePassword);
     }
     start() {
         //se ejecuta el metodo listen, el cual es el encargado de poner a correr el servidor

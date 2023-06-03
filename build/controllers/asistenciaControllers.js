@@ -22,10 +22,15 @@ class AsistenciasController {
     }
     create(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            yield database_1.default.promise().query('INSERT INTO asistencias SET ?', [req.body]);
-            res.json({
-                message: "asistencia registrada"
-            });
+            try {
+                yield database_1.default.promise().query('INSERT INTO asistencias SET ?', [req.body]);
+                res.json("asistencia registrada");
+            }
+            catch (_a) {
+                res.status(404).json({
+                    mensaje: "La asistencia ya existe"
+                });
+            }
         });
     }
     update(req, res) {

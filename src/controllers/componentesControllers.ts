@@ -44,6 +44,11 @@ class ComponentesControllers{
         });
     }
 
+    public async delete_componentes_roles(req:Request,res:Response):Promise<any>{
+        const {id} = req.params;
+        await db.promise().query('DELETE FROM componentes_roles WHERE id_rol = ?',[id])
+    }
+
 
 }
 

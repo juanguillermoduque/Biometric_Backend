@@ -4,10 +4,14 @@ import db from '../database';
 class RolesControllers{
 
     public async create(req:Request,res:Response):Promise<void>{
-        await db.promise().query('INSERT INTO roles SET ?',[req.body]);
-        res.json({
-            message:"roles creados"
-        });
+        try{
+            await db.promise().query('INSERT INTO roles SET ?',[req.body]);
+            res.json({
+                message:"roles creados"
+            });
+        }catch(e){
+            res.status(404).json("Algo salio mal")
+        }
     }
 
     public async update(req:Request,res:Response):Promise<void>{
@@ -28,10 +32,9 @@ class RolesControllers{
 
     public async getOneId(req:Request,res:Response):Promise<any>{
         const {id} = req.params;
-        const roles = await db.promise().query("SELECT * FROM roles WHERE id_rol = ?",[id]);
-        console.log("se ingreso a la ufuncion")
-        if(Object.keys(roles).length > 0){
-            return res.json((roles[0])[0]);
+        const rolesId = await db.promise().query("SELECT * FROM roles WHERE id_rol = ?",[id]);
+        if(Object.keys(rolesId).length > 0){
+            return res.json((rolesId[0])[0]);
         }
         res.status(404).json({
             text: "roles no exite"

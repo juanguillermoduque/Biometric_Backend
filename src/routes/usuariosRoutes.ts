@@ -16,6 +16,8 @@ class UsuariosRoutes{
     this.router.put('/editar:id',validateToken,usuariosController.update);
     this.router.get('/:id',validateToken,usuariosController.getOne);
     this.router.post('/recuperarcontrasena:email',usuariosController.recuperarPassword);
+    this.router.put('/:id/password', usuariosController.updatePassword);
+
    }
 } ///:email
 

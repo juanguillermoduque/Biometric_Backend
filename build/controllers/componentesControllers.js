@@ -58,6 +58,12 @@ class ComponentesControllers {
             });
         });
     }
+    delete_componentes_roles(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const { id } = req.params;
+            yield database_1.default.promise().query('DELETE FROM componentes_roles WHERE id_rol = ?', [id]);
+        });
+    }
 }
 const componentesControllers = new ComponentesControllers();
 exports.default = componentesControllers;

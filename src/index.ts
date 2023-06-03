@@ -15,9 +15,9 @@ import rolesRoutes from './routes/rolesRoutes';
 import componenteRoutes from './routes/componenteRoutes';
 import filtrosBusqueda from './routes/filtrosBusqueda';
 import usuarioRolesRoutes from './routes/usuarioRolesRoutes';
+import programasRoutes from './routes/programasRoutes';
 import instructoresRoutes from './routes/instructoresRoutes';
 import usuariosController from './controllers/usuarioControllers'
-
  
 //se crea la clase server, la cual servira de main, para ejecutar la aplicación
 class Server{
@@ -38,10 +38,10 @@ class Server{
 
         //se declara el uso de las dependencias
         this.app.use(morgan('dev'));
-        this.app.use(cors());
+        this.app.use(cors({origin: '*'}));
         this.app.use(express.json());
         this.app.use(express.urlencoded({extended: false}));
-    }
+    } 
  
     //routes contiene todas las rutas a las que accedera el front
     routes(): void{
@@ -56,8 +56,8 @@ class Server{
         this.app.use('/api/componentes',componenteRoutes);
         this.app.use('/api/filtros/',filtrosBusqueda);
         this.app.use('/api/usuario_rol',usuarioRolesRoutes);
+        this.app.use('/api/programas',programasRoutes);
         this.app.use('/api/instructor',instructoresRoutes);
-        //this.app.put('/api/usuarios/:id/password', usuariosController.updatePassword);
     }
     start(){
         //se ejecuta el metodo listen, el cual es el encargado de poner a correr el servidor

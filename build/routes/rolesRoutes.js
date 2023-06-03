@@ -12,11 +12,11 @@ class RolesRoutes {
         this.config();
     }
     config() {
+        this.router.put('/editar:id', validateTokenController_1.default, rolesControllers_1.default.update);
+        this.router.get('/rol:id', validateTokenController_1.default, rolesControllers_1.default.getOneId);
         this.router.get('/', validateTokenController_1.default, rolesControllers_1.default.list);
         this.router.post('/', validateTokenController_1.default, rolesControllers_1.default.create);
-        this.router.put('/editar:id', validateTokenController_1.default, rolesControllers_1.default.update);
         this.router.get('/:name', validateTokenController_1.default, rolesControllers_1.default.getOne);
-        this.router.get('/id:id', validateTokenController_1.default, rolesControllers_1.default.getOneId);
     }
 }
 const rolesRoutes = new RolesRoutes();

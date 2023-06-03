@@ -8,10 +8,14 @@ class AsistenciasController{
     } 
 
     public async create(req:Request,res:Response):Promise<void>{
-        await db.promise().query('INSERT INTO asistencias SET ?',[req.body]);
-        res.json({
-            message:"asistencia registrada"
-        });
+        try{
+            await db.promise().query('INSERT INTO asistencias SET ?',[req.body]);
+            res.json("asistencia registrada");
+        }catch{
+            res.status(404).json({
+                mensaje:"La asistencia ya existe"
+            })
+        }
     }
 
     public async update(req:Request,res:Response):Promise<void>{
