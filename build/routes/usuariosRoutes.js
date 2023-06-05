@@ -13,12 +13,12 @@ class UsuariosRoutes {
     }
     config() {
         this.router.get('/', validateTokenController_1.default, usuarioControllers_1.default.list);
+        this.router.get('/recuperarcontrasena:id', usuarioControllers_1.default.recuperarPassword);
         this.router.post('/', validateTokenController_1.default, usuarioControllers_1.default.create);
         this.router.put('/editar:id', validateTokenController_1.default, usuarioControllers_1.default.update);
         this.router.get('/:id', validateTokenController_1.default, usuarioControllers_1.default.getOne);
-        this.router.post('/recuperarcontrasena:email', usuarioControllers_1.default.recuperarPassword);
-        this.router.put('/:id/password', usuarioControllers_1.default.updatePassword);
+        this.router.put('/:id/password', validateTokenController_1.default, usuarioControllers_1.default.updatePassword);
     }
-} ///:email
+}
 const usuariosRoutes = new UsuariosRoutes();
 exports.default = usuariosRoutes.router;

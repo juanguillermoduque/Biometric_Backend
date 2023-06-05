@@ -53,12 +53,11 @@ class UsuariosController{
 
     public async recuperarPassword(req: Request, res: Response) { //recibir información de tipo Request, dar una respuesta de tipo Response
         
-        const {email} = req.params; //se van a recuperar del request body
+        const {id} = req.params; //se van a recuperar del request body
+        try{
+            const existEmail = await db.promise().query("SELECT email FROM usuarios WHERE num_id=?",[id]);
+            const email = existEmail[0][0].email;
 
-        try {
-            
-            const existEmail = await db.promise().query("SELECT * FROM usuarios WHERE email=?",[email]);
-            
             if(existEmail[0][0]){
                 //recuperar - crear contraseña nueva 
                 const passwordNew = generate({
@@ -67,24 +66,20 @@ class UsuariosController{
                     uppercase: false
                 });
                 
+                /*
                 //cifrar la nueva contraseña
                 const salt = bycript.genSaltSync(); //por defecto, va a generar 10 saltos
                 //const iuser = bycript.hashSync(passwordNew, salt) //vamos a cifrar el password nuevo
-                const iuser = bycript.hashSync(passwordNew, 10);
+                const iuser = bycript.hashSync(passwordNew, 1);
+                */
                 let pass = {
-                    password : iuser
+                    password : passwordNew
                 }
 
-                
-                
                 try{
-                    const updatePassword  =  await db.promise().query('UPDATE usuarios SET ? WHERE email=?',[pass,email]);
-                    console.log(updatePassword)
-
+                    const updatePassword  =  await db.promise().query('UPDATE usuarios SET ? WHERE num_id=?',[pass,id]);
                     //si se actualizó el correo correctamente, se le va a enviar un correo
                     Email.instance.enviarEmail(email, passwordNew);
-
-
                     //enviar un mensaje, un status 200
                     return res.status(200).json({
                         ok: true,
@@ -96,7 +91,6 @@ class UsuariosController{
                         msg: `La contraseña no se pudo actualizar`
                     });
                 }
-                
             }
             return res.status(400).json({
                 ok: false,

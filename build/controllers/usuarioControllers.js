@@ -14,7 +14,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const database_1 = __importDefault(require("../database"));
 const generate_password_1 = require("generate-password");
-const bcrypt_1 = __importDefault(require("bcrypt"));
 const email_1 = __importDefault(require("../helpers/email"));
 class UsuariosController {
     list(req, res) {
@@ -67,9 +66,10 @@ class UsuariosController {
     //RECUPERAR CONSTRASEÑA
     recuperarPassword(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const { email } = req.params; //se van a recuperar del request body
+            const { id } = req.params; //se van a recuperar del request body
             try {
-                const existEmail = yield database_1.default.promise().query("SELECT * FROM usuarios WHERE email=?", [email]);
+                const existEmail = yield database_1.default.promise().query("SELECT email FROM usuarios WHERE num_id=?", [id]);
+                const email = existEmail[0][0].email;
                 if (existEmail[0][0]) {
                     //recuperar - crear contraseña nueva 
                     const passwordNew = (0, generate_password_1.generate)({
@@ -77,16 +77,17 @@ class UsuariosController {
                         numbers: true,
                         uppercase: false
                     });
+                    /*
                     //cifrar la nueva contraseña
-                    const salt = bcrypt_1.default.genSaltSync(); //por defecto, va a generar 10 saltos
+                    const salt = bycript.genSaltSync(); //por defecto, va a generar 10 saltos
                     //const iuser = bycript.hashSync(passwordNew, salt) //vamos a cifrar el password nuevo
-                    const iuser = bcrypt_1.default.hashSync(passwordNew, 10);
+                    const iuser = bycript.hashSync(passwordNew, 1);
+                    */
                     let pass = {
-                        password: iuser
+                        password: passwordNew
                     };
                     try {
-                        const updatePassword = yield database_1.default.promise().query('UPDATE usuarios SET ? WHERE email=?', [pass, email]);
-                        console.log(updatePassword);
+                        const updatePassword = yield database_1.default.promise().query('UPDATE usuarios SET ? WHERE num_id=?', [pass, id]);
                         //si se actualizó el correo correctamente, se le va a enviar un correo
                         email_1.default.instance.enviarEmail(email, passwordNew);
                         //enviar un mensaje, un status 200
