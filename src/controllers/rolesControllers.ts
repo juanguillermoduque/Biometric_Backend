@@ -44,7 +44,8 @@ class RolesControllers{
     public async list(req:Request,res:Response):Promise<void>{
         const roles = await db.promise().query('SELECT * FROM roles');
         res.json(roles);
-     } 
+    } 
+
 }
 
 const rolesControllers = new RolesControllers();

@@ -13,23 +13,15 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const database_1 = __importDefault(require("../database"));
-class InstructoresControllers {
-    getRolesInstructor(req, res) {
+class AprendizControllers {
+    getRolesAprendices(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const instructores = yield database_1.default.promise().query("SELECT * FROM usuario_roles WHERE id_rol = 2");
-            if (Object.keys(instructores).length > 0) {
-                return res.json((instructores[0]));
+            const aprendices = yield database_1.default.promise().query("SELECT * FROM usuario_roles WHERE id_rol = 3");
+            if (Object.keys(aprendices).length > 0) {
+                return res.json((aprendices[0]));
             }
         });
     }
-    createFichaInstructor(req, res) {
-        return __awaiter(this, void 0, void 0, function* () {
-            yield database_1.default.promise().query('INSERT INTO ficha_instructor SET ? ', [req.body]);
-            res.json({
-                message: "El instructor/a ha sido vinculado correctamente a la ficha"
-            });
-        });
-    }
 }
-const instructoresControllers = new InstructoresControllers();
-exports.default = instructoresControllers;
+const aprendizController = new AprendizControllers();
+exports.default = aprendizController;

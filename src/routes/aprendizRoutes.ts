@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import validateToken from '../controllers/validateTokenController';
-import instructoresControllers from '../controllers/instructoresController';
+import aprendizControllers from '../controllers/aprendizController';
 
 class InstructorRoutes{
    public router : Router = Router();
@@ -9,8 +9,7 @@ class InstructorRoutes{
    }
 
    config():void{
-    this.router.get('/instructor',validateToken,instructoresControllers.getRolesInstructor);
-    this.router.post('/fichainstructor',validateToken,instructoresControllers.createFichaInstructor);
+    this.router.get('/',validateToken,aprendizControllers.getRolesAprendices);
    }
 }
 

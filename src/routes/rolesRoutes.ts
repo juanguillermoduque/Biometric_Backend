@@ -15,7 +15,6 @@ class RolesRoutes{
     this.router.get('/',validateToken,rolesControllers.list);
     this.router.post('/',validateToken,rolesControllers.create);
     this.router.get('/:name',validateToken,rolesControllers.getOne);
-    
    }
 } 
 

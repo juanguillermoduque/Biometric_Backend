@@ -10,6 +10,7 @@ CREATE TABLE roles(
 
 INSERT INTO roles(nombre_rol) values ('ADMIN');
 INSERT INTO roles(nombre_rol) values ('INSTRUCTOR');
+INSERT INTO roles(nombre_rol) values ('APRENDIZ');
 
 CREATE TABLE componentes(
     id_componente BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
@@ -32,6 +33,8 @@ INSERT INTO componentes_roles(id_rol , id_componente) values (1,1),(1,2),(1,3),(
 (1,6),(1,7);
 INSERT INTO componentes_roles(id_rol , id_componente) values (2,1),(2,2),(2,3),(2,4),(2,5);
 
+INSERT INTO componentes_roles(id_rol , id_componente) values (3,1),(3,2),(3,3);
+
 CREATE TABLE usuarios( 
     num_id BIGINT UNSIGNED UNIQUE NOT NULL PRIMARY KEY,
     first_name VARCHAR(84) NOT NULL,
@@ -48,7 +51,8 @@ CREATE TABLE usuarios(
 INSERT INTO usuarios (num_id,first_name,last_name,type_id,email,estado,password,biometric_date) 
 values (1,'Juan','Duque','CE','g.duque@utp.edu.co','ACTIVO','sena',1), 
 (2,'Daryana','Robles','CC','dary@hola','ACTIVO','sena123',2),
-(3,'Pruebas','BS','CC','pruebasbiometricservice@gmail.com','ACTIVO','biometrics2465417',3);
+(3,'Luis','Moncada','CC','hola|hola','ACTIVO','sena123',2),
+(4,'Pruebas','BS','CC','pruebasbiometricservice@gmail.com','ACTIVO','biometrics2465417',3);
 
 CREATE TABLE usuario_roles(
     id_usuario_roles BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
@@ -60,7 +64,8 @@ CREATE TABLE usuario_roles(
 
 INSERT INTO usuario_roles(id_usuario,id_rol) values (1,1);
 INSERT INTO usuario_roles(id_usuario,id_rol) values (2,2);
-INSERT INTO usuario_roles(id_usuario,id_rol) values (3,2);
+INSERT INTO usuario_roles(id_usuario,id_rol) values (3,3);
+INSERT INTO usuario_roles(id_usuario,id_rol) values (4,3);
 
 CREATE TABLE programas(
     id_programa BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY, 
@@ -93,6 +98,8 @@ CREATE TABLE competencias(
     FOREIGN KEY(id_ficha) REFERENCES fichas(id_ficha) ON DELETE CASCADE ON UPDATE CASCADE
 )ENGINE = INNODB;
 
+INSERT INTO competencias(name_competencia, id_ficha) values ('Analizar los requerimientos del software a desarrollar',1);
+
 CREATE TABLE ficha_instructor(
     id_ficha_instructor BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     id_ficha BIGINT UNSIGNED,
@@ -100,6 +107,7 @@ CREATE TABLE ficha_instructor(
     FOREIGN KEY(id_ficha) REFERENCES fichas(id_ficha) ON DELETE CASCADE ON UPDATE CASCADE,
     FOREIGN KEY(id_instructor) REFERENCES usuarios(num_id) ON DELETE CASCADE ON UPDATE CASCADE
 )ENGINE = INNODB;
+
 
 CREATE TABLE horario(
     id_horario BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
@@ -113,18 +121,22 @@ CREATE TABLE horario(
     FOREIGN KEY(id_instructor) REFERENCES usuarios(num_id) ON DELETE CASCADE ON UPDATE CASCADE
 )ENGINE = INNODB;
 
+INSERT INTO horario(id_instructor, jornada, id_ficha, date_start, date_end, fecha) values (1,'DIURNA',1,'07:00:00','09:00:00','2020-10-10');
+INSERT INTO horario(id_instructor, jornada, id_ficha, date_start, date_end, fecha) values (1,'DIURNA',1,'09:00:00','11:00:00','2020-10-10');
+
 CREATE TABLE asistencias(
     id_asistencia BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     id_aprendiz BIGINT UNSIGNED,
     id_horario BIGINT UNSIGNED,
     hora_ingreso TIME NOT NULL,
-    hora_salida TIME NOT NULL,
     comments VARCHAR(100),
     created_at TIMESTAMP NULL,
     updated_at TIMESTAMP NULL,
     FOREIGN KEY(id_aprendiz) REFERENCES usuarios(num_id) ON DELETE CASCADE ON UPDATE CASCADE,
     FOREIGN KEY(id_horario) REFERENCES horario(id_horario) ON DELETE CASCADE ON UPDATE CASCADE
 )ENGINE = INNODB;
+
+INSERT INTO asistencias(id_aprendiz, id_horario, hora_ingreso, comments) values (2,1,'07:00:00','hola');
 
 CREATE TABLE excusa(
     id_excusa BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
@@ -133,6 +145,8 @@ CREATE TABLE excusa(
     archivo INT,
     FOREIGN KEY(id_asistencia) REFERENCES asistencias(id_asistencia) ON DELETE CASCADE ON UPDATE CASCADE
 )ENGINE = INNODB;
+
+INSERT INTO excusa(id_asistencia, comments, archivo) values (1,'hola',1);
 
 
 
