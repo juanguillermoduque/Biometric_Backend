@@ -16,7 +16,6 @@ class CompetenciasController{
                 mensaje:"Competencia ya existe"
             })
         }
-
     }
 
     public async update(req:Request,res:Response):Promise<void>{

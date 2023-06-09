@@ -17,7 +17,7 @@ CREATE TABLE componentes(
     nombre_componente VARCHAR(100)
 )ENGINE = INNODB;
 
-INSERT INTO componentes(nombre_componente) values ('Asistencias'),('Competencias'),('Excusas'),
+INSERT INTO componentes(nombre_componente) values ('Asistencias'),('Excusas'),
 ('Fichas'),('Horarios'),('Usuarios'),('Roles');
 
 
@@ -30,7 +30,7 @@ CREATE TABLE componentes_roles(
 )ENGINE = INNODB;
 
 INSERT INTO componentes_roles(id_rol , id_componente) values (1,1),(1,2),(1,3),(1,4),(1,5),
-(1,6),(1,7);
+(1,6);
 INSERT INTO componentes_roles(id_rol , id_componente) values (2,1),(2,2),(2,3),(2,4),(2,5);
 
 INSERT INTO componentes_roles(id_rol , id_componente) values (3,1),(3,2),(3,3);
@@ -89,16 +89,6 @@ CREATE TABLE fichas(
 INSERT INTO fichas(code_ficha, id_programa) values (2465417, 1);
 INSERT INTO fichas(code_ficha, id_programa) values (2476528, 2);
 INSERT INTO fichas(code_ficha, id_programa) values (2400510, 3);
-
-
-CREATE TABLE competencias(
-    id_competencia BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    name_competencia VARCHAR(100),
-    id_ficha BIGINT UNSIGNED,
-    FOREIGN KEY(id_ficha) REFERENCES fichas(id_ficha) ON DELETE CASCADE ON UPDATE CASCADE
-)ENGINE = INNODB;
-
-INSERT INTO competencias(name_competencia, id_ficha) values ('Analizar los requerimientos del software a desarrollar',1);
 
 CREATE TABLE ficha_instructor(
     id_ficha_instructor BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,

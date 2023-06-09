@@ -94,7 +94,7 @@ class UsuariosController{
             }
             return res.status(400).json({
                 ok: false,
-                msg: `El email es incorrecto`
+                msg: `Numero de documento incorrecto`
             })
 
         } catch (error) { //el catch es que el servidor no respondió, si hay un error arriba, nos va a enviar al catch
