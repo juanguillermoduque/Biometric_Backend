@@ -17,6 +17,7 @@ class FiltrosRoutes {
         this.router.get('/searchHorario:filter', validateTokenController_1.default, filtrosBusquedaController_1.default.searchHorario);
         this.router.get('/searchAsistencia:filter', validateTokenController_1.default, filtrosBusquedaController_1.default.searchAsistencia);
         this.router.get('/searchExcusa:filter', validateTokenController_1.default, filtrosBusquedaController_1.default.searchExcusa);
+        this.router.get('/searchRol:filter', validateTokenController_1.default, filtrosBusquedaController_1.default.searchRol);
     }
 }
 const filtrosRoutes = new FiltrosRoutes();

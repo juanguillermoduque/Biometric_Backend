@@ -41,7 +41,7 @@ CREATE TABLE usuarios(
     last_name VARCHAR(84) NOT NULL, 
     type_id enum('CC','TI','CE') NOT NULL,
     email VARCHAR(60) UNIQUE NOT NULL,
-    estado enum('ACTIVO','INACTIVO'), 
+    estado enum('ACTIVO','INACTIVO') DEFAULT 'ACTIVO', 
     password VARCHAR(80) NOT NULL,
     biometric_date BIGINT,
     created_at TIMESTAMP NULL,
@@ -111,8 +111,8 @@ CREATE TABLE horario(
     FOREIGN KEY(id_instructor) REFERENCES usuarios(num_id) ON DELETE CASCADE ON UPDATE CASCADE
 )ENGINE = INNODB;
 
-INSERT INTO horario(id_instructor, jornada, id_ficha, date_start, date_end, fecha) values (1,'DIURNA',1,'07:00:00','09:00:00','2020-10-10');
-INSERT INTO horario(id_instructor, jornada, id_ficha, date_start, date_end, fecha) values (1,'DIURNA',1,'09:00:00','11:00:00','2020-10-10');
+INSERT INTO horario(id_instructor, jornada, id_ficha, date_start, date_end, fecha) values (1,'DIURNA',1,'07:00:00','09:00:00','2023-10-10');
+INSERT INTO horario(id_instructor, jornada, id_ficha, date_start, date_end, fecha) values (1,'DIURNA',1,'09:00:00','11:00:00','2023-10-11');
 
 CREATE TABLE asistencias(
     id_asistencia BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,

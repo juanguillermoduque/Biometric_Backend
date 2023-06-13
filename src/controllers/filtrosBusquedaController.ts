@@ -11,7 +11,7 @@ public async searchFicha(req:Request,res:Response):Promise<any>{
 
 public async searchUsuario(req:Request,res:Response):Promise<any>{
     const {filtro} = req.params;
-    const usuariosId = await db.promise().query("SELECT * FROM usuarios WHERE num_id like ? or email like ? or first_name like ? or last_name like ?",[filtro+'%','%' + filtro , filtro+'%' , '%' + filtro]);
+    const usuariosId = await db.promise().query("SELECT * FROM usuarios WHERE num_id like ? or email like ? or first_name like ? or last_name like ? or estado like ?",[filtro + '%', filtro + '%', filtro + '%' , filtro +'%' , filtro +'%']);
     res.json(usuariosId);
 }
 
@@ -30,6 +30,12 @@ public async searchAsistencia(req:Request,res:Response):Promise<any>{
 public async searchExcusa(req:Request,res:Response):Promise<any>{
     const {filter} = req.params;
     const excusaId = await db.promise().query("SELECT * FROM asistencias WHERE id_asistencia like ? ",[filter+'%']);
+    res.json(excusaId);
+}
+
+public async searchRol(req:Request,res:Response):Promise<any>{
+    const {filter} = req.params;
+    const excusaId = await db.promise().query("SELECT * FROM roles WHERE id_rol like ? or nombre_rol like ?",[filter+'%',filter+'%']);
     res.json(excusaId);
 }
 

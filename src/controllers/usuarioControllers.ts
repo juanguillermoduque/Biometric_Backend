@@ -19,7 +19,6 @@ class UsuariosController{
         }catch{
             
         }
-    
     }
 
     public async update(req:Request,res:Response):Promise<void>{
@@ -56,9 +55,9 @@ class UsuariosController{
         const {id} = req.params; //se van a recuperar del request body
         try{
             const existEmail = await db.promise().query("SELECT email FROM usuarios WHERE num_id=?",[id]);
-            const email = existEmail[0][0].email;
-
+            
             if(existEmail[0][0]){
+                const email = existEmail[0][0].email;
                 //recuperar - crear contraseña nueva 
                 const passwordNew = generate({
                     length: 8, //de 8 caracteres

@@ -15,6 +15,7 @@ class FiltrosRoutes{
     this.router.get('/searchHorario:filter',validateToken,filtrosBusqueda.searchHorario);
     this.router.get('/searchAsistencia:filter',validateToken,filtrosBusqueda.searchAsistencia);
     this.router.get('/searchExcusa:filter',validateToken,filtrosBusqueda.searchExcusa);
+    this.router.get('/searchRol:filter',validateToken,filtrosBusqueda.searchRol);
    
    }
 

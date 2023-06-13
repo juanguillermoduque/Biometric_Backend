@@ -57,6 +57,18 @@ class RolesControllers {
             });
         });
     }
+    getOneByIdUser(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const { id } = req.params;
+            const roles = yield database_1.default.promise().query("SELECT roles.id_rol,roles.nombre_rol FROM roles INNER JOIN usuario_roles ON roles.id_rol = usuario_roles.id_rol WHERE id_usuario = ?", [id]);
+            if (Object.keys(roles).length > 0) {
+                return res.json((roles[0])[0]);
+            }
+            res.status(404).json({
+                text: "roles no exite"
+            });
+        });
+    }
     list(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const roles = yield database_1.default.promise().query('SELECT * FROM roles');

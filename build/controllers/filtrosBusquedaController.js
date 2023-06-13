@@ -24,7 +24,7 @@ class FiltrosBusqueda {
     searchUsuario(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const { filtro } = req.params;
-            const usuariosId = yield database_1.default.promise().query("SELECT * FROM usuarios WHERE num_id like ? or email like ? or first_name like ? or last_name like ?", [filtro + '%', '%' + filtro, filtro + '%', '%' + filtro]);
+            const usuariosId = yield database_1.default.promise().query("SELECT * FROM usuarios WHERE num_id like ? or email like ? or first_name like ? or last_name like ? or estado like ?", [filtro + '%', filtro + '%', filtro + '%', filtro + '%', filtro + '%']);
             res.json(usuariosId);
         });
     }
@@ -46,6 +46,13 @@ class FiltrosBusqueda {
         return __awaiter(this, void 0, void 0, function* () {
             const { filter } = req.params;
             const excusaId = yield database_1.default.promise().query("SELECT * FROM asistencias WHERE id_asistencia like ? ", [filter + '%']);
+            res.json(excusaId);
+        });
+    }
+    searchRol(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const { filter } = req.params;
+            const excusaId = yield database_1.default.promise().query("SELECT * FROM roles WHERE id_rol like ? or nombre_rol like ?", [filter + '%', filter + '%']);
             res.json(excusaId);
         });
     }

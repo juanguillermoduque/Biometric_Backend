@@ -69,8 +69,8 @@ class UsuariosController {
             const { id } = req.params; //se van a recuperar del request body
             try {
                 const existEmail = yield database_1.default.promise().query("SELECT email FROM usuarios WHERE num_id=?", [id]);
-                const email = existEmail[0][0].email;
                 if (existEmail[0][0]) {
+                    const email = existEmail[0][0].email;
                     //recuperar - crear contraseña nueva 
                     const passwordNew = (0, generate_password_1.generate)({
                         length: 8,

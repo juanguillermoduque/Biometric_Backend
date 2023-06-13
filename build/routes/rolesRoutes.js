@@ -17,6 +17,7 @@ class RolesRoutes {
         this.router.get('/', validateTokenController_1.default, rolesControllers_1.default.list);
         this.router.post('/', validateTokenController_1.default, rolesControllers_1.default.create);
         this.router.get('/:name', validateTokenController_1.default, rolesControllers_1.default.getOne);
+        this.router.get('/usuario/:id', rolesControllers_1.default.getOneByIdUser);
     }
 }
 const rolesRoutes = new RolesRoutes();
