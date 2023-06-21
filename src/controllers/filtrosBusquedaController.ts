@@ -18,6 +18,7 @@ public async searchUsuario(req:Request,res:Response):Promise<any>{
 public async searchHorario(req:Request,res:Response):Promise<any>{
     const {filter} = req.params;
     const horarioId = await db.promise().query("SELECT * FROM horario WHERE id_horario like ? ",[filter+'%']);
+    console.log(filter);
     res.json(horarioId);
 }
 

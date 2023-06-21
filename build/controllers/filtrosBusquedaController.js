@@ -32,6 +32,7 @@ class FiltrosBusqueda {
         return __awaiter(this, void 0, void 0, function* () {
             const { filter } = req.params;
             const horarioId = yield database_1.default.promise().query("SELECT * FROM horario WHERE id_horario like ? ", [filter + '%']);
+            console.log(filter);
             res.json(horarioId);
         });
     }

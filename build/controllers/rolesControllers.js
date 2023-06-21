@@ -31,6 +31,9 @@ class RolesControllers {
         return __awaiter(this, void 0, void 0, function* () {
             const { id } = req.params;
             yield database_1.default.promise().query('UPDATE roles SET ? WHERE id_rol = ?', [req.body, id]);
+            res.json({
+                message: "roles creados"
+            });
         });
     }
     getOne(req, res) {

@@ -58,6 +58,15 @@ class ComponentesControllers {
             });
         });
     }
+    getComponentesByRol(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            console.log("entre");
+            const { id } = req.params;
+            const roles = yield database_1.default.promise().query('SELECT componentes.* , roles.* FROM componentes_roles INNER JOIN componentes, roles ON componentes_roles.id_rol = roles.id_rol ON componentes_roles.id_componente = componentes.id_componente  WHERE componentes_roles.id_rol = ?', [id]);
+            console.log(roles);
+            res.json(roles);
+        });
+    }
     delete_componentes_roles(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const { id } = req.params;

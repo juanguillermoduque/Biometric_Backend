@@ -44,6 +44,14 @@ class ComponentesControllers{
         });
     }
 
+    public async getComponentesByRol(req:Request,res:Response):Promise<any>{
+        console.log("entre");
+        const {id} = req.params;
+        const roles = await db.promise().query('SELECT componentes.* , roles.* FROM componentes_roles INNER JOIN componentes, roles ON componentes_roles.id_rol = roles.id_rol ON componentes_roles.id_componente = componentes.id_componente  WHERE componentes_roles.id_rol = ?',[id]);
+        console.log(roles);
+        res.json(roles);
+    }
+
     public async delete_componentes_roles(req:Request,res:Response):Promise<any>{
         const {id} = req.params;
         await db.promise().query('DELETE FROM componentes_roles WHERE id_rol = ?',[id])
