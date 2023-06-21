@@ -16,7 +16,7 @@ const database_1 = __importDefault(require("../database"));
 class FichasController {
     list(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const fichas = yield database_1.default.promise().query('SELECT * FROM fichas');
+            const fichas = yield database_1.default.promise().query('SELECT fichas.*, programas.name_programa FROM fichas INNER JOIN programas ON fichas.id_programa = programas.id_programa');
             res.json(fichas);
         });
     }
@@ -38,12 +38,15 @@ class FichasController {
         return __awaiter(this, void 0, void 0, function* () {
             const { id } = req.params;
             yield database_1.default.promise().query('UPDATE fichas SET ? WHERE code_ficha = ?', [req.body, id]);
+            res.json({
+                message: "Ficha editada"
+            });
         });
     }
     getOne(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const { id } = req.params;
-            const ficha = yield database_1.default.promise().query("SELECT * FROM fichas WHERE code_ficha = ?", [id]);
+            const ficha = yield database_1.default.promise().query("SELECT fichas.*,programas.name_programa FROM fichas INNER JOIN programas ON fichas.id_programa = programas.id_programa WHERE code_ficha = ?", [id]);
             if (Object.keys(ficha).length > 0) {
                 return res.json((ficha[0])[0]);
             }

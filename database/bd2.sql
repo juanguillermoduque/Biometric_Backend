@@ -79,8 +79,7 @@ CREATE TABLE fichas(
     id_ficha BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     code_ficha BIGINT UNSIGNED UNIQUE NOT NULL, 
     id_programa BIGINT UNSIGNED,
-    date_start DATE NULL,
-    date_end DATE NULL,
+    estado enum('ACTIVO','INACTIVO') DEFAULT 'ACTIVO', 
     created_at TIMESTAMP NULL,
     updated_at TIMESTAMP NULL,
     FOREIGN KEY(id_programa) REFERENCES programas(id_programa) ON DELETE CASCADE ON UPDATE CASCADE
@@ -89,6 +88,8 @@ CREATE TABLE fichas(
 INSERT INTO fichas(code_ficha, id_programa) values (2465417, 1);
 INSERT INTO fichas(code_ficha, id_programa) values (2476528, 2);
 INSERT INTO fichas(code_ficha, id_programa) values (2400510, 3);
+INSERT INTO fichas(code_ficha, id_programa) values (2800510, 4);
+INSERT INTO fichas(code_ficha, id_programa) values (2100510, 5);
 
 CREATE TABLE ficha_instructor(
     id_ficha_instructor BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,

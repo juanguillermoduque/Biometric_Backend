@@ -17,7 +17,7 @@ class FiltrosBusqueda {
     searchFicha(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const { id } = req.params;
-            const fichasId = yield database_1.default.promise().query("SELECT * FROM fichas WHERE code_ficha like ? or code_ficha like ? or id_programa like ?", [id + '%', '%' + id, id + '%']);
+            const fichasId = yield database_1.default.promise().query("SELECT * FROM fichas INNER JOIN programas ON fichas.id_programa = programas.id_programa WHERE fichas.code_ficha like ? or fichas.code_ficha like ? or programas.name_programa like ? or fichas.estado like ?", [id + '%', '%' + id, id + '%', id + '%']);
             res.json(fichasId);
         });
     }

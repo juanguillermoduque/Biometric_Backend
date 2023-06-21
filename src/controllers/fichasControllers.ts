@@ -3,7 +3,7 @@ import db from '../database';
 
 class FichasController{
     public async list(req:Request,res:Response):Promise<void>{
-       const fichas = await db.promise().query('SELECT * FROM fichas');
+       const fichas = await db.promise().query('SELECT fichas.*, programas.name_programa FROM fichas INNER JOIN programas ON fichas.id_programa = programas.id_programa');
        res.json(fichas);
     } 
 
@@ -22,11 +22,14 @@ class FichasController{
     public async update(req:Request,res:Response):Promise<void>{
         const {id} = req.params;
         await db.promise().query('UPDATE fichas SET ? WHERE code_ficha = ?',[req.body,id]);
+        res.json({
+            message:"Ficha editada" 
+        });
     } 
 
     public async getOne(req:Request,res:Response):Promise<any>{
         const {id} = req.params;
-        const ficha = await db.promise().query("SELECT * FROM fichas WHERE code_ficha = ?",[id]);
+        const ficha = await db.promise().query("SELECT fichas.*,programas.name_programa FROM fichas INNER JOIN programas ON fichas.id_programa = programas.id_programa WHERE code_ficha = ?",[id]);
         
         if( Object.keys(ficha).length > 0){
             return res.json((ficha[0])[0]);

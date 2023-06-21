@@ -4,7 +4,7 @@ import db from '../database';
 class ProgramasController{
     public async list(req:Request,res:Response):Promise<void>{
        const programas = await db.promise().query('SELECT * FROM programas');
-       res.json(programas);
+       res.json(programas[0]);
     } 
 
     public async create(req:Request,res:Response):Promise<void>{

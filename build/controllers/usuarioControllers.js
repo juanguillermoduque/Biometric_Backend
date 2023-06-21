@@ -30,7 +30,8 @@ class UsuariosController {
                     message: "usuarios creados"
                 });
             }
-            catch (_a) {
+            catch (e) {
+                console.error(e);
             }
         });
     }
@@ -96,7 +97,8 @@ class UsuariosController {
                             msg: `El correo ha sido enviado a ${email} satisfactoriamente`
                         });
                     }
-                    catch (_a) {
+                    catch (e) {
+                        console.error(e);
                         return res.status(400).json({
                             ok: false,
                             msg: `La contraseña no se pudo actualizar`

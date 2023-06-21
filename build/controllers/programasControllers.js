@@ -17,7 +17,7 @@ class ProgramasController {
     list(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const programas = yield database_1.default.promise().query('SELECT * FROM programas');
-            res.json(programas);
+            res.json(programas[0]);
         });
     }
     create(req, res) {
