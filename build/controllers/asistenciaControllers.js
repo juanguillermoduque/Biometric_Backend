@@ -16,7 +16,7 @@ const database_1 = __importDefault(require("../database"));
 class AsistenciasController {
     list(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const asistencias = yield database_1.default.promise().query('SELECT * FROM asistencias');
+            const asistencias = yield database_1.default.promise().query('SELECT asistencias.*,horario.* FROM asistencias INNER JOIN horario ON asistencias.id_horario = horario.id_horario');
             res.json(asistencias);
         });
     }
