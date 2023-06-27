@@ -24,7 +24,7 @@ public async searchHorario(req:Request,res:Response):Promise<any>{
 
 public async searchAsistencia(req:Request,res:Response):Promise<any>{
     const {filter} = req.params;
-    const asistenciaId = await db.promise().query("SELECT * FROM asistencias WHERE id_aprendiz like ? ",[filter+'%']);
+    const asistenciaId = await db.promise().query("SELECT asistencias.*,horario.* FROM asistencias INNER JOIN horario ON asistencias.id_horario = horario.id_horario WHERE asistencias.id_aprendiz like ? ",[filter+'%']);
     res.json(asistenciaId);
 }
 

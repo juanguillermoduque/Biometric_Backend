@@ -37,6 +37,7 @@ class AsistenciasController {
         return __awaiter(this, void 0, void 0, function* () {
             const { id } = req.params;
             yield database_1.default.promise().query('UPDATE asistencias SET ? WHERE id_asistencia = ?', [req.body, id]);
+            res.json("asistencia Editada");
         });
     }
     getOne(req, res) {

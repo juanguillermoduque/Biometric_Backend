@@ -39,7 +39,7 @@ class FiltrosBusqueda {
     searchAsistencia(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const { filter } = req.params;
-            const asistenciaId = yield database_1.default.promise().query("SELECT * FROM asistencias WHERE id_aprendiz like ? ", [filter + '%']);
+            const asistenciaId = yield database_1.default.promise().query("SELECT asistencias.*,horario.* FROM asistencias INNER JOIN horario ON asistencias.id_horario = horario.id_horario WHERE asistencias.id_aprendiz like ? ", [filter + '%']);
             res.json(asistenciaId);
         });
     }

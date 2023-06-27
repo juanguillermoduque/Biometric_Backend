@@ -9,7 +9,7 @@ class LoginController{
     public async auth(req:Request,res:Response):Promise<void>{
         try{
             const {email , password } = req.body;
-            const auth =await db.promise().query('SELECT * FROM usuarios WHERE email=? and password=?',[email,password])
+            const auth =await db.promise().query('SELECT * FROM usuarios WHERE email=? and password=? and estado=ACTIVO',[email,password])
             if(!auth){
                 res.status(401).json("Algo salio mal");
             }          
