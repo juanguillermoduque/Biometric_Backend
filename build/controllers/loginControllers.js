@@ -39,7 +39,7 @@ class LoginController {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 const { email, password } = req.body;
-                const auth = yield database_1.default.promise().query('SELECT * FROM usuarios WHERE email=? and password=? and estado=ACTIVO', [email, password]);
+                const auth = yield database_1.default.promise().query('SELECT * FROM usuarios WHERE email=? and password=? ', [email, password]);
                 if (!auth) {
                     res.status(401).json("Algo salio mal");
                 }
