@@ -3,7 +3,7 @@ import db from '../database';
 
 class InstructoresControllers{
     public async getRolesInstructor(req:Request,res:Response):Promise<any>{
-        const instructores = await db.promise().query("SELECT * FROM usuario_roles WHERE id_rol = 2");
+        const instructores = await db.promise().query("SELECT usuario_roles.*,usuarios.* FROM usuario_roles INNER JOIN usuarios ON usuarios.num_id = usuario_roles.id_usuario WHERE usuario_roles.id_rol = 2");
         if(Object.keys(instructores).length > 0){
             return res.json((instructores[0]));
         }

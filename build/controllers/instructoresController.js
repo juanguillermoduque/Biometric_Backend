@@ -16,7 +16,7 @@ const database_1 = __importDefault(require("../database"));
 class InstructoresControllers {
     getRolesInstructor(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const instructores = yield database_1.default.promise().query("SELECT * FROM usuario_roles WHERE id_rol = 2");
+            const instructores = yield database_1.default.promise().query("SELECT usuario_roles.*,usuarios.* FROM usuario_roles INNER JOIN usuarios ON usuarios.num_id = usuario_roles.id_usuario WHERE usuario_roles.id_rol = 2");
             if (Object.keys(instructores).length > 0) {
                 return res.json((instructores[0]));
             }

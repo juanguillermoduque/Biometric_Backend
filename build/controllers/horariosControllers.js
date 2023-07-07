@@ -16,7 +16,7 @@ const database_1 = __importDefault(require("../database"));
 class HorariosController {
     list(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const horario = yield database_1.default.promise().query('SELECT * FROM horario');
+            const horario = yield database_1.default.promise().query('SELECT horario.*,fichas.*, usuarios.* FROM horario INNER JOIN fichas ON horario.id_ficha = fichas.id_ficha INNER JOIN usuarios ON horario.id_instructor = usuarios.num_id');
             res.json(horario);
         });
     }
@@ -32,6 +32,9 @@ class HorariosController {
         return __awaiter(this, void 0, void 0, function* () {
             const { id } = req.params;
             yield database_1.default.promise().query('UPDATE horario SET ? WHERE id_horario = ?', [req.body, id]);
+            res.json({
+                message: "horario editado"
+            });
         });
     }
     getOne(req, res) {

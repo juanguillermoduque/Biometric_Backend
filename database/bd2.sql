@@ -18,7 +18,7 @@ CREATE TABLE componentes(
 )ENGINE = INNODB;
 
 INSERT INTO componentes(nombre_componente) values ('Asistencias'),('Excusas'),
-('Fichas'),('Horarios'),('Usuarios'),('Roles');
+('Fichas'),('Horarios'),('Usuarios'),('Roles'),('Asistencias Aprendiz'),('Excusas Aprendiz');
 
 
 CREATE TABLE componentes_roles(
@@ -33,7 +33,7 @@ INSERT INTO componentes_roles(id_rol , id_componente) values (1,1),(1,2),(1,3),(
 (1,6);
 INSERT INTO componentes_roles(id_rol , id_componente) values (2,1),(2,2),(2,3),(2,4),(2,5);
 
-INSERT INTO componentes_roles(id_rol , id_componente) values (3,1),(3,2),(3,3);
+INSERT INTO componentes_roles(id_rol , id_componente) values (3,7);
 
 CREATE TABLE usuarios( 
     num_id BIGINT UNSIGNED UNIQUE NOT NULL PRIMARY KEY,
@@ -112,8 +112,8 @@ CREATE TABLE horario(
     FOREIGN KEY(id_instructor) REFERENCES usuarios(num_id) ON DELETE CASCADE ON UPDATE CASCADE
 )ENGINE = INNODB;
 
-INSERT INTO horario(id_instructor, jornada, id_ficha, date_start, date_end, fecha) values (1,'DIURNA',1,'07:00:00','09:00:00','2023-10-10');
-INSERT INTO horario(id_instructor, jornada, id_ficha, date_start, date_end, fecha) values (1,'DIURNA',1,'09:00:00','11:00:00','2023-10-11');
+INSERT INTO horario(id_instructor, jornada, id_ficha, date_start, date_end, fecha) values (2,'DIURNA',1,'07:00:00','09:00:00','2023-10-10');
+INSERT INTO horario(id_instructor, jornada, id_ficha, date_start, date_end, fecha) values (2,'DIURNA',1,'09:00:00','11:00:00','2023-10-11');
 
 CREATE TABLE asistencias(
     id_asistencia BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
