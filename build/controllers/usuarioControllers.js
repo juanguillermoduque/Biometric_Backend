@@ -49,7 +49,7 @@ class UsuariosController {
                 return res.json((usuarios[0])[0]);
             }
             res.status(404).json({
-                text: "usuario no exite"
+                text: "usuario no existe"
             });
             console.log(usuarios);
         });
@@ -57,11 +57,19 @@ class UsuariosController {
     updatePassword(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const { id } = req.params;
-            const { password } = req.body;
-            yield database_1.default.promise().query('UPDATE usuarios SET password = ? WHERE num_id = ?', [password, id]);
-            res.json({
-                message: 'Contraseña ya actualizada'
-            });
+            const { newPassword } = req.body;
+            const { actualPassword } = req.body;
+            const [updates] = yield database_1.default.promise().query('UPDATE usuarios SET password = ? WHERE num_id = ? AND password = ?', [newPassword, id, actualPassword]);
+            if (updates.affectedRows > 0) {
+                res.json({
+                    message: 'Contraseña ya actualizada'
+                });
+            }
+            else {
+                res.json({
+                    message: 'Contraseña Incorrecta'
+                });
+            }
         });
     }
     //RECUPERAR CONSTRASEÑA
