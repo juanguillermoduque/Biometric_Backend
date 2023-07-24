@@ -14,6 +14,7 @@ class ExcusaRoutes{
     this.router.post('/',validateToken,excusasController.create);
     this.router.put('/editar:id',validateToken,excusasController.update);
     this.router.get('/:id',validateToken,excusasController.getOne);
+    this.router.post('/upload',validateToken,excusasController.uploadExcusa)
    }
 }
 

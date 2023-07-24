@@ -1,5 +1,7 @@
 import {Request,Response} from 'express';
 import db from '../database';
+import multer from 'multer';
+
 
 class ExcusasController{
     public async list(req:Request,res:Response):Promise<void>{
@@ -30,7 +32,29 @@ class ExcusasController{
         });
         console.log(excusa);
     }
+
+    public async uploadExcusa(req:Request, res:Response){
+        const file = req.body
+        const storage = multer.diskStorage({
+            filename:function(res:Request, file:Express.Multer.File, cb: (error: Error | null, destination: string) => void){
+                const ext = file.originalname.split('.').pop()
+                const fileName = Date.now()
+                cb(null, `${fileName}. ${ext}`)
+        
+            },
+            destination:function(res:Request, file:Express.Multer.File, cb: (error: Error | null, destination: string) => void){
+                cb(null, `../../public`)
+            }
+        });
+        
+        const upload = multer({storage});
+        upload.single(file);
+        res.send({data: 'OK'});
+    }
+
+    
 }
+
 
 const excusasController = new ExcusasController();
 export default excusasController;

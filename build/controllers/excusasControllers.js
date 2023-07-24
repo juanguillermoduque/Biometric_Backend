@@ -13,6 +13,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const database_1 = __importDefault(require("../database"));
+const multer_1 = __importDefault(require("multer"));
 class ExcusasController {
     list(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -45,6 +46,24 @@ class ExcusasController {
                 text: "excusa no exite"
             });
             console.log(excusa);
+        });
+    }
+    uploadExcusa(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const file = req.body;
+            const storage = multer_1.default.diskStorage({
+                filename: function (res, file, cb) {
+                    const ext = file.originalname.split('.').pop();
+                    const fileName = Date.now();
+                    cb(null, `${fileName}. ${ext}`);
+                },
+                destination: function (res, file, cb) {
+                    cb(null, `../../public`);
+                }
+            });
+            const upload = (0, multer_1.default)({ storage });
+            upload.single(file);
+            res.send({ data: 'OK' });
         });
     }
 }
