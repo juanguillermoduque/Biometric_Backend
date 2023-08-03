@@ -12,6 +12,8 @@ class UsuariosController{
 
     public async create(req:Request,res:Response):Promise<void>{
         try{
+            let pass = req.body.password
+            
             await db.promise().query('INSERT INTO usuarios SET ?',[req.body]);
             res.json({
                 message:"usuarios creados"

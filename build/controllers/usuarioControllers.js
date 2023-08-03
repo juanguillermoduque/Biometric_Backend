@@ -25,6 +25,7 @@ class UsuariosController {
     create(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
+                let pass = req.body.password;
                 yield database_1.default.promise().query('INSERT INTO usuarios SET ?', [req.body]);
                 res.json({
                     message: "usuarios creados"
