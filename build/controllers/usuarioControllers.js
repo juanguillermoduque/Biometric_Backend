@@ -14,6 +14,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const database_1 = __importDefault(require("../database"));
 const generate_password_1 = require("generate-password");
+const bcrypt_1 = __importDefault(require("bcrypt"));
 const email_1 = __importDefault(require("../helpers/email"));
 class UsuariosController {
     list(req, res) {
@@ -25,10 +26,13 @@ class UsuariosController {
     create(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                let pass = req.body.password;
-                yield database_1.default.promise().query('INSERT INTO usuarios SET ?', [req.body]);
+                const saltRounds = 10; //Número de rondas de sal
+                const hashedPassword = yield bcrypt_1.default.hash(req.body.password, saltRounds);
+                //Usar la contraseña hasheada en lugar de la original
+                const newUser = Object.assign(Object.assign({}, req.body), { password: hashedPassword });
+                yield database_1.default.promise().query('INSERT INTO usuarios SET ?', [newUser]);
                 res.json({
-                    message: "usuarios creados"
+                    message: 'usuarios creados'
                 });
             }
             catch (e) {
@@ -60,15 +64,33 @@ class UsuariosController {
             const { id } = req.params;
             const { newPassword } = req.body;
             const { actualPassword } = req.body;
-            const [updates] = yield database_1.default.promise().query('UPDATE usuarios SET password = ? WHERE num_id = ? AND password = ?', [newPassword, id, actualPassword]);
-            if (updates.affectedRows > 0) {
-                res.json({
-                    message: 'Contraseña ya actualizada'
-                });
+            const [user] = yield database_1.default.promise().query('SELECT password FROM usuarios WHERE num_id = ?', [id]);
+            if (user.length > 0) {
+                const passwordMatch = yield bcrypt_1.default.compare(actualPassword, user[0].password);
+                if (passwordMatch) {
+                    const saltRounds = 10;
+                    const hashedNewPassword = yield bcrypt_1.default.hash(newPassword, saltRounds);
+                    const [updates] = yield database_1.default.promise().query('UPDATE usuarios SET password = ? WHERE num_id = ?', [hashedNewPassword, id]);
+                    if (updates.affectedRows > 0) {
+                        res.json({
+                            message: 'Contraseña ya actualizada'
+                        });
+                    }
+                    else {
+                        res.json({
+                            message: 'Contraseña no pudo ser actualizada'
+                        });
+                    }
+                }
+                else {
+                    res.json({
+                        message: 'Contraseña Incorrecta'
+                    });
+                }
             }
             else {
-                res.json({
-                    message: 'Contraseña Incorrecta'
+                res.status(404).json({
+                    text: 'Usuario no existe'
                 });
             }
         });

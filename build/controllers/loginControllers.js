@@ -37,35 +37,42 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const database_1 = __importDefault(require("../database"));
 const jwt = __importStar(require("jsonwebtoken"));
+const bcrypt_1 = __importDefault(require("bcrypt"));
 const constants_1 = require("../constants");
 class LoginController {
     auth(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 const { email, password } = req.body;
-                const auth = yield database_1.default.promise().query('SELECT * FROM usuarios WHERE email=? and password=? ', [email, password]);
-                if (!auth) {
-                    res.status(401).json("Algo salio mal");
+                const passwordActualResult = yield database_1.default.promise().query('SELECT password FROM usuarios WHERE email=?', [email]);
+                if (passwordActualResult[0].length === 0) {
+                    res.status(401).json({ msg: 'Usuario o clave Incorrectas' });
+                    return;
                 }
-                if (Object.keys((auth)[0]).length > 0) {
-                    const data = auth[0];
-                    console.log(data);
-                    const token = jwt.sign({ data: data }, constants_1.SECRET_KEY, {
-                        expiresIn: 1800000
-                    });
-                    res.json(token);
+                const passwordActual = passwordActualResult[0][0].password.trim();
+                const passwordProvided = password.trim();
+                const passwordMatch = yield bcrypt_1.default.compare(passwordProvided, passwordActual);
+                if (passwordMatch) {
+                    const authResult = yield database_1.default.promise().query('SELECT * FROM usuarios WHERE email=?', [email]);
+                    if (authResult[0].length === 0) {
+                        res.status(401).json({ msg: 'Algo salió mal' });
+                    }
+                    else {
+                        const data = authResult[0];
+                        const token = jwt.sign({ data: data }, constants_1.SECRET_KEY, {
+                            expiresIn: '30m',
+                        });
+                        res.json(token);
+                    }
                 }
                 else {
-                    res.status(401).json({
-                        msg: "Usuario o clave Incorrectas"
-                    });
+                    res.status(401).json({ msg: 'Usuario o clave Incorrectas' });
                 }
             }
             catch (e) {
                 console.log(e);
                 res.sendStatus(500);
             }
-            ;
         });
     }
 }
