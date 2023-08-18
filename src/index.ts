@@ -2,6 +2,8 @@
 import express, {Application, urlencoded} from 'express';
 import morgan from 'morgan';
 import cors from 'cors';
+import bodyParser from 'body-parser'
+
 
 //Se importan los routers
 import fichasRoutes from './routes/fichasRoutes';

@@ -30,7 +30,7 @@ public async searchAsistencia(req:Request,res:Response):Promise<any>{
 
 public async searchExcusa(req:Request,res:Response):Promise<any>{
     const {filter} = req.params;
-    const excusaId = await db.promise().query("SELECT * FROM asistencias WHERE id_asistencia like ? ",[filter+'%']);
+    const excusaId = await db.promise().query("SELECT excusa.*,horario.* FROM excusa INNER JOIN horario ON excusa.id_horario = horario.id_horario WHERE estado like ? ",[filter+'%']);
     res.json(excusaId);
 }
 
@@ -39,7 +39,6 @@ public async searchRol(req:Request,res:Response):Promise<any>{
     const excusaId = await db.promise().query("SELECT * FROM roles WHERE id_rol like ? or nombre_rol like ?",[filter+'%',filter+'%']);
     res.json(excusaId);
 }
-
 
 
 }

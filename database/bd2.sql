@@ -131,13 +131,16 @@ INSERT INTO asistencias(id_aprendiz, id_horario, hora_ingreso, comments) values 
 
 CREATE TABLE excusa(
     id_excusa BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    id_asistencia BIGINT UNSIGNED,
+    id_horario BIGINT UNSIGNED,
+    id_aprendiz BIGINT UNSIGNED,
+    estado enum('Pendiente', 'Revisado', 'Rechazado') DEFAULT 'Pendiente',
     comments VARCHAR(100),
-    archivo INT,
-    FOREIGN KEY(id_asistencia) REFERENCES asistencias(id_asistencia) ON DELETE CASCADE ON UPDATE CASCADE
+    ruta_archivo VARCHAR (255),
+    FOREIGN KEY(id_horario) REFERENCES horario(id_horario) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY(id_aprendiz) REFERENCES usuarios(num_id) ON DELETE CASCADE ON UPDATE CASCADE
 )ENGINE = INNODB;
 
-INSERT INTO excusa(id_asistencia, comments, archivo) values (1,'hola',1);
+
 
 
 
