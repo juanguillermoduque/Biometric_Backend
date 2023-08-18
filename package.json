@@ -24,11 +24,8 @@
     "mysql2": "^3.2.0",
     "nodemailer": "^6.9.2",
     "promise-mysql": "^3.3.1",
-<<<<<<< HEAD
-    "xlsx": "^0.18.5"
-=======
+    "xlsx": "^0.18.5",
     "uuid": "^9.0.0"
->>>>>>> f91c20d68153246c263e80a5b5104058daf7b315
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.0",
