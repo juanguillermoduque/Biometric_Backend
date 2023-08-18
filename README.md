@@ -12,6 +12,9 @@ installar tsc:
 
     npm i typescript
 
+Instalar paquetes de node
+
+    npm install
 
 Para lograr la ejecucion del projesto se realiza el siguiente comando:
 
