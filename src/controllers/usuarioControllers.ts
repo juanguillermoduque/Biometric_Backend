@@ -1,7 +1,7 @@
 import {Request,Response} from 'express';
 import db from '../database';
 import { generate } from 'generate-password';
-import bycript from "bcrypt";
+import bcrypt from 'bcrypt';
 import Email from '../helpers/email';
 
 class UsuariosController{
@@ -10,19 +10,23 @@ class UsuariosController{
        res.json(usuarios);
     } 
 
-    public async create(req:Request,res:Response):Promise<void>{
-        try{
-            let pass = req.body.password
-            
-            await db.promise().query('INSERT INTO usuarios SET ?',[req.body]);
+    public async create(req: Request, res: Response): Promise<void> {
+        try {
+            const saltRounds = 10; //Número de rondas de sal
+            const hashedPassword = await bcrypt.hash(req.body.password, saltRounds);
+
+            //Usar la contraseña hasheada en lugar de la original
+            const newUser = { ...req.body, password: hashedPassword };
+            await db.promise().query('INSERT INTO usuarios SET ?', [newUser]);
+
             res.json({
-                message:"usuarios creados"
+                message: 'usuarios creados'
             });
-        }catch(e){
+        } catch (e) {
             console.error(e);
         }
     }
-
+    
     public async update(req:Request,res:Response):Promise<void>{
         const {id} = req.params;
         await db.promise().query('UPDATE usuarios SET ? WHERE num_id = ?',[req.body,id]);
@@ -45,22 +49,44 @@ class UsuariosController{
         const { newPassword } = req.body;
         const { actualPassword } = req.body;
 
-        const [updates] =  await db.promise().query('UPDATE usuarios SET password = ? WHERE num_id = ? AND password = ?', [newPassword, id,actualPassword]);
-       
-        if(updates.affectedRows > 0){
-            res.json({
-            message: 'Contraseña ya actualizada'
-            });
-        }else{
-            res.json({
-            message: 'Contraseña Incorrecta'
-            });
-        }
-       
+        const [user] = await db.promise().query('SELECT password FROM usuarios WHERE num_id = ?', [id]);
 
+        if (user.length > 0) {
+            const passwordMatch = await bcrypt.compare(actualPassword, user[0].password);
+
+            if (passwordMatch) {
+                const saltRounds = 10;
+                const hashedNewPassword = await bcrypt.hash(newPassword, saltRounds);
+
+                const [updates] = await db.promise().query(
+                    'UPDATE usuarios SET password = ? WHERE num_id = ?',
+                    [hashedNewPassword, id]
+                );
+
+                if (updates.affectedRows > 0) {
+                    res.json({
+                        message: 'Contraseña ya actualizada'
+                    });
+                } else {
+                    res.json({
+                        message: 'Contraseña no pudo ser actualizada'
+                    });
+                }
+            } else {
+                res.json({
+                    message: 'Contraseña Incorrecta'
+                });
+            }
+        } else {
+            res.status(404).json({
+                text: 'Usuario no existe'
+            });
+        } 
     }
 
+    
 
+    
     //RECUPERAR CONSTRASEÑA
 
     public async recuperarPassword(req: Request, res: Response) { //recibir información de tipo Request, dar una respuesta de tipo Response
