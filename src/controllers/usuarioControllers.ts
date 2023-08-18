@@ -105,6 +105,10 @@ class UsuariosController{
             });
         }   
     }
+    
+    public async findAprendiz(){
+        
+    }
 }
 
 const usuariosController = new UsuariosController();

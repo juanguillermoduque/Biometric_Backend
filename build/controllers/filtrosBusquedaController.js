@@ -46,7 +46,7 @@ class FiltrosBusqueda {
     searchExcusa(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const { filter } = req.params;
-            const excusaId = yield database_1.default.promise().query("SELECT * FROM asistencias WHERE id_asistencia like ? ", [filter + '%']);
+            const excusaId = yield database_1.default.promise().query("SELECT excusa.*,horario.* FROM excusa INNER JOIN horario ON excusa.id_horario = horario.id_horario WHERE estado like ? ", [filter + '%']);
             res.json(excusaId);
         });
     }

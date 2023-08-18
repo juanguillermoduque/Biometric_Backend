@@ -12,11 +12,12 @@ class ExcusaRoutes {
         this.config();
     }
     config() {
+        this.router.get('/public', excusasControllers_1.default.downloadPDF);
         this.router.get('/', validateTokenController_1.default, excusasControllers_1.default.list);
         this.router.post('/', validateTokenController_1.default, excusasControllers_1.default.create);
         this.router.put('/editar:id', validateTokenController_1.default, excusasControllers_1.default.update);
         this.router.get('/:id', validateTokenController_1.default, excusasControllers_1.default.getOne);
-        this.router.post('/upload', validateTokenController_1.default, excusasControllers_1.default.uploadExcusa);
+        this.router.post('/upload', excusasControllers_1.default.uploadExcusa);
     }
 }
 const excusaRoutes = new ExcusaRoutes();
