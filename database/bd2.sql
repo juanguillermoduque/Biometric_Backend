@@ -51,7 +51,7 @@ CREATE TABLE usuarios(
 INSERT INTO usuarios (num_id,first_name,last_name,type_id,email,estado,password,biometric_date) 
 values (1,'Juan','Duque','CE','g.duque@utp.edu.co','ACTIVO','$2b$10$liJNtFnh.ngj48T5Lb38geFy1sFybQTRzI3WTxV/eNUZMALRojXtW',1), 
 (2,'Daryana','Robles','CC','darianarobles05@gmail.com','ACTIVO','$2b$10$liJNtFnh.ngj48T5Lb38geFy1sFybQTRzI3WTxV/eNUZMALRojXtW',2),
-(3,'Juanito','Perez','CC','aprendiz@gmail.com','ACTIVO','$2b$10$liJNtFnh.ngj48T5Lb38geFy1sFybQTRzI3WTxV/eNUZMALRojXtW',3),
+(3,'Jhojan','Agudelo','CC','davio13bar@gmail.com','ACTIVO','$2b$10$liJNtFnh.ngj48T5Lb38geFy1sFybQTRzI3WTxV/eNUZMALRojXtW',3),
 (4,'Pruebas','BS','CC','pruebasbiometricservice@gmail.com','ACTIVO','biometrics2465417',4);
 
 CREATE TABLE usuario_roles(
