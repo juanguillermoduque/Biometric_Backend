@@ -13,10 +13,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const database_1 = __importDefault(require("../database"));
+const multer_1 = __importDefault(require("multer"));
+const path = require('path');
 class ExcusasController {
     list(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const excusa = yield database_1.default.promise().query('SELECT * FROM excusa');
+            const excusa = yield database_1.default.promise().query('SELECT excusa.*,horario.* FROM excusa INNER JOIN horario ON excusa.id_horario = horario.id_horario');
             res.json(excusa);
         });
     }
@@ -32,6 +34,9 @@ class ExcusasController {
         return __awaiter(this, void 0, void 0, function* () {
             const { id } = req.params;
             yield database_1.default.promise().query('UPDATE excusa SET ? WHERE id_excusa = ?', [req.body, id]);
+            res.json({
+                message: "excusa editada"
+            });
         });
     }
     getOne(req, res) {
@@ -42,9 +47,48 @@ class ExcusasController {
                 return res.json((excusa[0])[0]);
             }
             res.status(404).json({
-                text: "excusa no exite"
+                text: "excusa no existe"
             });
             console.log(excusa);
+        });
+    }
+    uploadExcusa(req, res) {
+        const storage = multer_1.default.diskStorage({
+            filename: function (req, file, cb) {
+                const ext = file.originalname.split('.').pop();
+                const fileName = Date.now(); // Convert to string
+                cb(null, `${fileName}.${ext}`); // Remove space between `${fileName}. ${ext}`
+            },
+            destination: function (req, file, cb) {
+                cb(null, 'public'); // Adjust the destination path
+            },
+        });
+        const upload = (0, multer_1.default)({ storage }).single('myFile'); // Use .single() here
+        upload(req, res, (err) => __awaiter(this, void 0, void 0, function* () {
+            if (err) {
+                console.error(err);
+                return res.status(500).send(err);
+            }
+            if (!req.file) {
+                return res.status(400).send("No se ha subido ningún archivo.");
+            }
+            let filePath = req.file.path;
+            console.log(filePath);
+            //await db.promise().query('INSERT INTO excusa (ruta_archivo) VALUES (?)',[filePath]);
+            return res.json(filePath);
+        }));
+    }
+    downloadPDF(req, res) {
+        const filename = req.query.filename;
+        const currentDirectory = __dirname;
+        const publicDirectory = path.join(currentDirectory, '..', '..');
+        const filePath = path.join(publicDirectory, filename);
+        console.log(filePath);
+        res.sendFile(filePath, (err) => {
+            if (err) {
+                console.error('Error al descargar el archivo:', err);
+                res.status(500).send('Error al descargar el archivo.');
+            }
         });
     }
 }

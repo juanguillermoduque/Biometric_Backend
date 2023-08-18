@@ -5,7 +5,7 @@ exports.default = {
     database: {
         host: 'localhost',
         user: 'root',
-        password: 'sena123',
+        password: '',
         database: 'biometric',
         port: 3306
     }

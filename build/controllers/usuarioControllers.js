@@ -128,6 +128,10 @@ class UsuariosController {
             }
         });
     }
+    findAprendiz() {
+        return __awaiter(this, void 0, void 0, function* () {
+        });
+    }
 }
 const usuariosController = new UsuariosController();
 exports.default = usuariosController;
