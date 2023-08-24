@@ -3,25 +3,6 @@ import db from '../database';
 
 class RolesControllers{
 
-    public async create(req:Request,res:Response):Promise<void>{
-        try{
-            await db.promise().query('INSERT INTO roles SET ?',[req.body]);
-            res.json({
-                message:"roles creados"
-            });
-        }catch(e){
-            res.status(404).json("Algo salio mal")
-        }
-    }
-
-    public async update(req:Request,res:Response):Promise<void>{
-        const {id} = req.params;
-        await db.promise().query('UPDATE roles SET ? WHERE id_rol = ?',[req.body,id]);
-        res.json({
-            message:"roles creados"
-        });
-    }
-
     public async getOne(req:Request,res:Response):Promise<any>{
         const {name} = req.params;
         const roles = await db.promise().query("SELECT * FROM roles WHERE nombre_rol = ?",[name]);

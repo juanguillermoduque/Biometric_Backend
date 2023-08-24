@@ -10,10 +10,8 @@ class RolesRoutes{
    }
 
    config():void{
-    this.router.put('/editar:id',validateToken,rolesControllers.update);
     this.router.get('/rol:id',validateToken,rolesControllers.getOneId);
     this.router.get('/',validateToken,rolesControllers.list);
-    this.router.post('/',validateToken,rolesControllers.create);
     this.router.get('/:name',validateToken,rolesControllers.getOne);
     this.router.get('/usuario/:id',rolesControllers.getOneByIdUser);
    }

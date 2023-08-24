@@ -7,6 +7,18 @@ class AsistenciasController{
        res.json(asistencias);
     } 
 
+    public async listAprendiz(req:Request,res:Response):Promise<void>{
+        const {id} = req.params
+        const asistencias = await db.promise().query('SELECT asistencias.*,horario.* FROM asistencias INNER JOIN horario ON asistencias.id_horario = horario.id_horario WHERE asistencias.id_aprendiz = ?',[id]);
+        res.json(asistencias[0]);
+    } 
+
+    public async listInstructor(req:Request,res:Response):Promise<void>{
+        const {id} = req.params
+        const asistencias = await db.promise().query('SELECT asistencias.*,horario.* FROM asistencias INNER JOIN horario ON asistencias.id_horario = horario.id_horario WHERE horario.id_instructor = ?',[id]);
+        res.json(asistencias[0]);
+    } 
+
     public async create(req:Request,res:Response):Promise<void>{
         try{
             await db.promise().query('INSERT INTO asistencias SET ?',[req.body]);
@@ -35,6 +47,8 @@ class AsistenciasController{
         }); 
         console.log(asistencias);
     }
+
+    
 }
 
 const asistenciaController = new AsistenciasController();

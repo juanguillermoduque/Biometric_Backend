@@ -11,6 +11,8 @@ class AsistenciaRoutes{
 
    config():void{
     this.router.get('/',validateToken,asistenciaController.list);
+    this.router.get('/aprendiz:id',validateToken,asistenciaController.listAprendiz);
+    this.router.get('/instructor:id',validateToken,asistenciaController.listInstructor);
     this.router.post('/',validateToken,asistenciaController.create);
     this.router.put('/editar:id',validateToken,asistenciaController.update);
     this.router.get('/:id',validateToken,asistenciaController.getOne);

@@ -8,17 +8,19 @@ CREATE TABLE roles(
     nombre_rol VARCHAR(100) UNIQUE
 )ENGINE = INNODB;
 
-INSERT INTO roles(nombre_rol) values ('ADMIN');
+INSERT INTO roles(nombre_rol) values ('ADMINISTRADOR');
 INSERT INTO roles(nombre_rol) values ('INSTRUCTOR');
 INSERT INTO roles(nombre_rol) values ('APRENDIZ');
+INSERT INTO roles(nombre_rol) values ('APRENDIZ - INSTRUCTOR');
+INSERT INTO roles(nombre_rol) values ('INSTRUCTOR - ADMINISTRADOR');
 
 CREATE TABLE componentes(
     id_componente BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     nombre_componente VARCHAR(100)
 )ENGINE = INNODB;
 
-INSERT INTO componentes(nombre_componente) values ('Asistencias'),('Excusas'),
-('Fichas'),('Horarios'),('Usuarios'),('Roles'),('Asistencias Aprendiz'),('Excusas Aprendiz');
+INSERT INTO componentes(nombre_componente) values ('Asistencias Aprendiz'),('Excusas Aprendiz'),('Asistencias Instructor'),('Excusas Instructor'),
+('Fichas Instructor'),('Fichas'),('Horarios'),('Usuarios');
 
 
 CREATE TABLE componentes_roles(
@@ -29,11 +31,11 @@ CREATE TABLE componentes_roles(
     FOREIGN KEY(id_rol) REFERENCES roles(id_rol) ON DELETE CASCADE ON UPDATE CASCADE
 )ENGINE = INNODB;
 
-INSERT INTO componentes_roles(id_rol , id_componente) values (1,1),(1,2),(1,3),(1,4),(1,5),
-(1,6);
-INSERT INTO componentes_roles(id_rol , id_componente) values (2,1),(2,2),(2,3),(2,4);
-
-INSERT INTO componentes_roles(id_rol , id_componente) values (3,7),(3,8);
+INSERT INTO componentes_roles(id_rol , id_componente) values (1,6),(1,7),(1,8);
+INSERT INTO componentes_roles(id_rol , id_componente) values (2,3),(2,4),(2,5);
+INSERT INTO componentes_roles(id_rol , id_componente) values (3,1),(3,2);
+INSERT INTO componentes_roles(id_rol , id_componente) values (4,1),(4,2),(4,3),(4,4),(4,5);
+INSERT INTO componentes_roles(id_rol , id_componente) values (5,6),(5,7),(5,8),(5,3),(5,4),(5,5);
 
 CREATE TABLE usuarios( 
     num_id BIGINT UNSIGNED UNIQUE NOT NULL PRIMARY KEY,
@@ -52,7 +54,9 @@ INSERT INTO usuarios (num_id,first_name,last_name,type_id,email,estado,password,
 values (1,'Juan','Duque','CE','g.duque@utp.edu.co','ACTIVO','$2b$10$liJNtFnh.ngj48T5Lb38geFy1sFybQTRzI3WTxV/eNUZMALRojXtW',1), 
 (2,'Daryana','Robles','CC','darianarobles05@gmail.com','ACTIVO','$2b$10$liJNtFnh.ngj48T5Lb38geFy1sFybQTRzI3WTxV/eNUZMALRojXtW',2),
 (3,'Jhojan','Agudelo','CC','davio13bar@gmail.com','ACTIVO','$2b$10$liJNtFnh.ngj48T5Lb38geFy1sFybQTRzI3WTxV/eNUZMALRojXtW',3),
-(4,'Pruebas','BS','CC','pruebasbiometricservice@gmail.com','ACTIVO','biometrics2465417',4);
+(4,'Aprendiz','Instructor','CC','aprendiz_instructor@gmail.com','ACTIVO','$2b$10$liJNtFnh.ngj48T5Lb38geFy1sFybQTRzI3WTxV/eNUZMALRojXtW',4),
+(5,'Admin','Instructor','CC','admin_instructor@gmail.com','ACTIVO','$2b$10$liJNtFnh.ngj48T5Lb38geFy1sFybQTRzI3WTxV/eNUZMALRojXtW',5),
+(6,'Pruebas','BS','CC','pruebasbiometricservice@gmail.com','ACTIVO','biometrics2465417',6);
 
 CREATE TABLE usuario_roles(
     id_usuario_roles BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
@@ -65,7 +69,9 @@ CREATE TABLE usuario_roles(
 INSERT INTO usuario_roles(id_usuario,id_rol) values (1,1);
 INSERT INTO usuario_roles(id_usuario,id_rol) values (2,2);
 INSERT INTO usuario_roles(id_usuario,id_rol) values (3,3);
-INSERT INTO usuario_roles(id_usuario,id_rol) values (4,3);
+INSERT INTO usuario_roles(id_usuario,id_rol) values (4,4);
+INSERT INTO usuario_roles(id_usuario,id_rol) values (5,5);
+INSERT INTO usuario_roles(id_usuario,id_rol) values (6,3);
 
 CREATE TABLE programas(
     id_programa BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY, 
@@ -139,11 +145,3 @@ CREATE TABLE excusa(
     FOREIGN KEY(id_horario) REFERENCES horario(id_horario) ON DELETE CASCADE ON UPDATE CASCADE,
     FOREIGN KEY(id_aprendiz) REFERENCES usuarios(num_id) ON DELETE CASCADE ON UPDATE CASCADE
 )ENGINE = INNODB;
-
-
-
-
-
-
-
-
