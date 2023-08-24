@@ -1,12 +1,3 @@
-/*var transport = nodemailer.createTransport({
-    host: "sandbox.smtp.mailtrap.io",
-    port: 2525,
-    auth: {
-      user: "53ddde7812fc14",
-      pass: "01f67c23ce943f"
-    }
-  });*/
-
 import nodemailer from 'nodemailer';  
 import SMTPTransport from 'nodemailer/lib/smtp-transport';
   
@@ -40,19 +31,25 @@ export default class Email { //se pone default ya que la clase va a ser lo únic
     }
 
     //Pedir a qué correo vamos a enviar el email
-    public async enviarEmail(email:string, passwordNew: string) {
+    public async enviarEmail(name: string, email:string, passwordNew: string) {
         return await this.transporter.sendMail({ //es de tipo promesa, el await es para que pueda esperar a que responda esta función
             from: '"Recuperación de contraseña"<53ddde7812fc14>', //a quién se le va a enviar el correo
             to: email, //a quién se lo enviamos, se lo enviamos al email
             subject: 'Recuperación de contraseña', //asunto
-            html: `<b>
-            Su correo es: ${email} y su contraseña será ${passwordNew} , por favor, cambie su contraseña
-            Da click al siguiente enlace: sssssssss
-            </b>` 
+            html: 
+            `<p>
+            ¡Hola ${name}!<br>
+            Se ha restablecido tu contraseña.<br><br>
 
+            Tu correo es: ${email} y tu nueva contraseña es: ${passwordNew}<br>
+
+            Recuerda cambiar tu contraseña.<br><br>
+
+            Cordialmente,<br>
+            Biometric Service.
+            </p>` 
         })
     }
 }
-  
-  
-  
+
+

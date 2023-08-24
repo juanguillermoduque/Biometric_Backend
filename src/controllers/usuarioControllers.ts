@@ -93,7 +93,7 @@ class UsuariosController{
         
         const {id} = req.params; //se van a recuperar del request body
         try{
-            const existEmail = await db.promise().query("SELECT email FROM usuarios WHERE num_id=?",[id]);
+            const existEmail = await db.promise().query("SELECT email, first_name, last_name FROM usuarios WHERE num_id=?",[id]);
             
             if(existEmail[0][0]){
                 const email = existEmail[0][0].email;
@@ -103,21 +103,25 @@ class UsuariosController{
                     numbers: true,
                     uppercase: false
                 });
+                const saltRounds = 10; //Número de rondas de sal
+                const hashedPassword = await bcrypt.hash(passwordNew, saltRounds);
                 
-                /*
+
                 //cifrar la nueva contraseña
-                const salt = bycript.genSaltSync(); //por defecto, va a generar 10 saltos
+                const salt = bcrypt.genSaltSync(); //por defecto, va a generar 10 saltos
                 //const iuser = bycript.hashSync(passwordNew, salt) //vamos a cifrar el password nuevo
-                const iuser = bycript.hashSync(passwordNew, 1);
-                */
+                const iuser = bcrypt.hashSync(passwordNew, 1);
+
+                
                 let pass = {
-                    password : passwordNew
+                    password : hashedPassword
                 }
 
                 try{
                     const updatePassword  =  await db.promise().query('UPDATE usuarios SET ? WHERE num_id=?',[pass,id]);
                     //si se actualizó el correo correctamente, se le va a enviar un correo
-                    Email.instance.enviarEmail(email, passwordNew);
+                    const name = existEmail[0][0].first_name + " " +  existEmail[0][0].last_name;
+                    Email.instance.enviarEmail(name, email, passwordNew);
                     //enviar un mensaje, un status 200
                     return res.status(200).json({
                         ok: true,
@@ -131,6 +135,7 @@ class UsuariosController{
                     });
                 }
             }
+            
             return res.status(400).json({
                 ok: false,
                 msg: `Numero de documento incorrecto`
