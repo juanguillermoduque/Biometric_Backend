@@ -25,7 +25,7 @@ class FichasController{
         res.json({
             message:"Ficha editada" 
         });
-    } 
+            } 
 
     public async getOne(req:Request,res:Response):Promise<any>{
         const {id} = req.params;
@@ -39,6 +39,85 @@ class FichasController{
         });
         console.log(ficha.body);
     }
+
+    public async vinulateAprendiz(req:Request,res:Response):Promise<void>{
+        const aprendices = await db.promise().query("SELECT usuarios.first_name,usuarios.last_name,usuarios.num_id,usuarios.email FROM usuario_roles INNER JOIN usuarios ON usuario_roles.id_usuario = usuarios.num_id WHERE id_rol IN (3, 4) AND usuario_roles.id_usuario = ? ",[req.body.id_aprendiz]);
+        if( Object.keys(aprendices[0]).length > 0){
+            try{
+                await db.promise().query('INSERT INTO ficha_aprendiz SET ? ',[req.body]);
+                res.json({
+                    message:"Aprendiz vinculado" ,
+                    status:true
+                });
+            }catch{
+                res.json({
+                    message:"Aprendiz ya esta vinculado",
+                    status:false
+                }) 
+            }
+        }else{
+            res.json({
+                message:"No es un aprendiz" ,
+                status:false
+            });
+        }
+
+    } 
+ 
+    public async desvincularAprendiz(req:Request,res:Response):Promise<void>{
+
+        const [result] = await db.promise().query('DELETE FROM ficha_aprendiz WHERE id_ficha = ? and id_aprendiz = ? ',[req.body.id_ficha,req.body.id_aprendiz]);
+        if (result.affectedRows > 0) {
+            res.json({
+                message: "Aprendiz Desvinculado",
+                status: true
+            });
+        } else { 
+            res.json({
+                message: "El aprendiz no esta vinculado",
+                status: false
+            });
+        }
+    }
+
+    public async vinulateInstructor(req:Request,res:Response):Promise<void>{
+        const instructores = await db.promise().query("SELECT usuarios.first_name,usuarios.last_name,usuarios.num_id,usuarios.email FROM usuario_roles INNER JOIN usuarios ON usuario_roles.id_usuario = usuarios.num_id WHERE id_rol IN (2, 4, 5) AND usuario_roles.id_usuario = ? ",[req.body.id_instructor]);
+        if( Object.keys(instructores[0]).length > 0){
+            try{
+                await db.promise().query('INSERT INTO ficha_instructor SET ? ',[req.body]);
+                res.json({
+                    message:"Instructor vinculado" ,
+                    status:true
+                });
+            }catch{
+                res.json({
+                    message:"Instructor ya esta vinculado",
+                    status:false
+                }) 
+            }
+        }else{
+            res.json({
+                message:"No es un Instructor" ,
+                status:false
+            });
+        }
+    } 
+ 
+    public async desvincularInstructor(req:Request,res:Response):Promise<void>{
+
+        const [result] = await db.promise().query('DELETE FROM ficha_instructor WHERE id_ficha = ? and id_instructor = ? ',[req.body.id_ficha,req.body.id_instructor]);
+        if (result.affectedRows > 0) {
+            res.json({
+                message: "instructor Desvinculado",
+                status: true 
+            });
+        } else { 
+            res.json({
+                message: "El instructor no esta vinculado",
+                status: false
+            });
+        }
+    } 
 }
 
 const fichasController = new FichasController();

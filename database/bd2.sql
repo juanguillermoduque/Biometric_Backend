@@ -101,8 +101,18 @@ CREATE TABLE ficha_instructor(
     id_ficha_instructor BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     id_ficha BIGINT UNSIGNED,
     id_instructor BIGINT UNSIGNED,
-    FOREIGN KEY(id_ficha) REFERENCES fichas(id_ficha) ON DELETE CASCADE ON UPDATE CASCADE,
-    FOREIGN KEY(id_instructor) REFERENCES usuarios(num_id) ON DELETE CASCADE ON UPDATE CASCADE
+    FOREIGN KEY(id_ficha) REFERENCES fichas(code_ficha) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY(id_instructor) REFERENCES usuarios(num_id) ON DELETE CASCADE ON UPDATE CASCADE,
+    UNIQUE(id_ficha,id_instructor)
+)ENGINE = INNODB;
+
+CREATE TABLE ficha_aprendiz(
+    id_ficha_aprendiz BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    id_ficha BIGINT UNSIGNED,
+    id_aprendiz BIGINT UNSIGNED,
+    FOREIGN KEY(id_ficha) REFERENCES fichas(code_ficha) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY(id_aprendiz) REFERENCES usuarios(num_id) ON DELETE CASCADE ON UPDATE CASCADE,
+    UNIQUE(id_ficha,id_aprendiz)
 )ENGINE = INNODB;
 
 

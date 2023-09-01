@@ -5,7 +5,7 @@ class AsistenciasController{
     public async list(req:Request,res:Response):Promise<void>{
        const asistencias = await db.promise().query('SELECT asistencias.*,horario.* FROM asistencias INNER JOIN horario ON asistencias.id_horario = horario.id_horario');
        res.json(asistencias);
-    } 
+    }
 
     public async listAprendiz(req:Request,res:Response):Promise<void>{
         const {id} = req.params
