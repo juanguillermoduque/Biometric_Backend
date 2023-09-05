@@ -31,6 +31,7 @@ class InstructoresControllers{
     public async getFichasInstructores(req:Request,res:Response):Promise<any>{
         const {instructorId} = req.params;
         const fichas = await db.promise().query('SELECT fichas.*, programas.name_programa FROM fichas INNER JOIN programas ON fichas.id_programa = programas.id_programa INNER JOIN ficha_instructor ON ficha_instructor.id_ficha = fichas.code_ficha WHERE ficha_instructor.id_instructor = ?',[instructorId]);
+        return res.json((fichas));
     }   
 }
 

@@ -106,6 +106,12 @@ CREATE TABLE ficha_instructor(
     UNIQUE(id_ficha,id_instructor)
 )ENGINE = INNODB;
 
+INSERT INTO ficha_instructor(id_ficha, id_instructor) values (2465417, 2);
+INSERT INTO ficha_instructor(id_ficha, id_instructor) values (2476528, 2);
+INSERT INTO ficha_instructor(id_ficha, id_instructor) values (2400510, 2);
+INSERT INTO ficha_instructor(id_ficha, id_instructor) values (2800510, 4);
+INSERT INTO ficha_instructor(id_ficha, id_instructor) values (2100510, 4);
+
 CREATE TABLE ficha_aprendiz(
     id_ficha_aprendiz BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     id_ficha BIGINT UNSIGNED,

@@ -11,8 +11,8 @@ class ExcusaRoutes{
 
    config():void{
     this.router.get('/public', excusasController.downloadPDF);
-    this.router.get('/',validateToken,excusasController.list);
-    this.router.get('/aprendiz:id',validateToken,excusasController.listAprendiz);
+    this.router.get('/:idInstructor',validateToken,excusasController.list);
+    this.router.get('/aprendiz/:id',validateToken,excusasController.listAprendiz);
     this.router.post('/',validateToken,excusasController.create);
     this.router.put('/editar:id',validateToken,excusasController.update);
     this.router.get('/:id',validateToken,excusasController.getOne);

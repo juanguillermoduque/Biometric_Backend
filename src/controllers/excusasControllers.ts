@@ -7,11 +7,12 @@ const path = require('path');
 
 class ExcusasController{
     public async list(req:Request,res:Response):Promise<void>{
-       const excusa = await db.promise().query('SELECT excusa.*,horario.* FROM excusa INNER JOIN horario ON excusa.id_horario = horario.id_horario');
+      const {idInstructor} = req.params
+       const excusa = await db.promise().query('SELECT excusa.*,horario.* FROM excusa INNER JOIN horario ON excusa.id_horario = horario.id_horario WHERE horario.id_instructor = ?',[idInstructor]);
        res.json(excusa);
     } 
 
-    public async listAprendiz(req:Request , res:Response):Promise<void>{
+    public async listAprendiz(req:Request,res:Response):Promise<void>{
       const {id} = req.params; 
       const excusa = await db.promise().query('SELECT excusa.*,horario.* FROM excusa INNER JOIN horario ON excusa.id_horario = horario.id_horario where excusa.id_aprendiz = ?',[id]);
       res.json(excusa[0]);
