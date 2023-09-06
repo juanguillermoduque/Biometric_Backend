@@ -10,6 +10,7 @@ class InstructorRoutes{
 
    config():void{
     this.router.get('/',validateToken,aprendizControllers.getRolesAprendices);
+    this.router.get('/aprendices:fichaId',validateToken,aprendizControllers.getAprendicesFichas);
    }
 }
 

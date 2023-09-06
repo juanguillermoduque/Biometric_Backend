@@ -10,6 +10,8 @@ class InstructorRoutes{
 
    config():void{
     this.router.get('/instructor',validateToken,instructoresControllers.getRolesInstructor);
+    this.router.get('/instructor:fichaId',validateToken,instructoresControllers.getInstructoresFichas);
+    this.router.get('/fichainstructor:instructorId',validateToken,instructoresControllers.getFichasInstructores);
     this.router.post('/fichainstructor',validateToken,instructoresControllers.createFichaInstructor);
    }
 }

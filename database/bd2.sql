@@ -78,8 +78,8 @@ CREATE TABLE programas(
     name_programa VARCHAR(50) NOT NULL     
 )ENGINE = INNODB;
 
-INSERT INTO programas(name_programa) values ('Analisis y desarrollo de Software'),('Produccion multimedia'),('Confecciones'),
-('Soldadura'),('Construcciones');
+INSERT INTO programas(name_programa) values ('Analisis y desarrollo de Software'),('Desarrollo publicitario'),('Desarrollo de medios gráficos visuales'),
+('Animación digital'),('Animación 3d'),('Desarrollo de colecciones para la industria de la moda'),('Programacion de Software'),('Sistemas');
 
 CREATE TABLE fichas(
     id_ficha BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
@@ -101,8 +101,24 @@ CREATE TABLE ficha_instructor(
     id_ficha_instructor BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     id_ficha BIGINT UNSIGNED,
     id_instructor BIGINT UNSIGNED,
-    FOREIGN KEY(id_ficha) REFERENCES fichas(id_ficha) ON DELETE CASCADE ON UPDATE CASCADE,
-    FOREIGN KEY(id_instructor) REFERENCES usuarios(num_id) ON DELETE CASCADE ON UPDATE CASCADE
+    FOREIGN KEY(id_ficha) REFERENCES fichas(code_ficha) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY(id_instructor) REFERENCES usuarios(num_id) ON DELETE CASCADE ON UPDATE CASCADE,
+    UNIQUE(id_ficha,id_instructor)
+)ENGINE = INNODB;
+
+INSERT INTO ficha_instructor(id_ficha, id_instructor) values (2465417, 2);
+INSERT INTO ficha_instructor(id_ficha, id_instructor) values (2476528, 2);
+INSERT INTO ficha_instructor(id_ficha, id_instructor) values (2400510, 2);
+INSERT INTO ficha_instructor(id_ficha, id_instructor) values (2800510, 4);
+INSERT INTO ficha_instructor(id_ficha, id_instructor) values (2100510, 4);
+
+CREATE TABLE ficha_aprendiz(
+    id_ficha_aprendiz BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    id_ficha BIGINT UNSIGNED,
+    id_aprendiz BIGINT UNSIGNED,
+    FOREIGN KEY(id_ficha) REFERENCES fichas(code_ficha) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY(id_aprendiz) REFERENCES usuarios(num_id) ON DELETE CASCADE ON UPDATE CASCADE,
+    UNIQUE(id_ficha,id_aprendiz)
 )ENGINE = INNODB;
 
 
