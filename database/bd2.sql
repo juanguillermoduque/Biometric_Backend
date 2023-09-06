@@ -78,8 +78,14 @@ CREATE TABLE programas(
     name_programa VARCHAR(50) NOT NULL     
 )ENGINE = INNODB;
 
-INSERT INTO programas(name_programa) values ('Analisis y desarrollo de Software'),('Produccion multimedia'),('Confecciones'),
-('Soldadura'),('Construcciones');
+ (adso)
+.
+.
+.
+.
+.
+INSERT INTO programas(name_programa) values ('Analisis y desarrollo de Software'),('Desarrollo publicitario'),('Desarrollo de medios gráficos visuales'),
+('Animación digital'),('Animación 3d'),('Desarrollo de colecciones para la industria de la moda'),('Programacion de Software'),('Sistemas');
 
 CREATE TABLE fichas(
     id_ficha BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
