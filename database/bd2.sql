@@ -78,12 +78,6 @@ CREATE TABLE programas(
     name_programa VARCHAR(50) NOT NULL     
 )ENGINE = INNODB;
 
- (adso)
-.
-.
-.
-.
-.
 INSERT INTO programas(name_programa) values ('Analisis y desarrollo de Software'),('Desarrollo publicitario'),('Desarrollo de medios gráficos visuales'),
 ('Animación digital'),('Animación 3d'),('Desarrollo de colecciones para la industria de la moda'),('Programacion de Software'),('Sistemas');
 
