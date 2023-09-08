@@ -10,7 +10,7 @@ class FichasRoutes{
    } 
 
    config():void{
-    this.router.get('/',validateToken,fichasController.list);
+    this.router.get('/',fichasController.list);
     this.router.post('/',validateToken,fichasController.create);
     this.router.put('/editar:id',validateToken,fichasController.update);
     this.router.get('/:id',validateToken,fichasController.getOne);
