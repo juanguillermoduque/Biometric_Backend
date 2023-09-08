@@ -46,6 +46,7 @@ CREATE TABLE usuarios(
     estado enum('ACTIVO','INACTIVO') DEFAULT 'ACTIVO', 
     password VARCHAR(80) NOT NULL,
     biometric_date BIGINT,
+    photoURL VARCHAR(500),
     created_at TIMESTAMP NULL,
     updated_at TIMESTAMP NULL
 )ENGINE = INNODB;
