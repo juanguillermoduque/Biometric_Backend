@@ -18,6 +18,8 @@ class UsuariosController{
             //Usar la contraseña hasheada en lugar de la original
             const newUser = { ...req.body, password: hashedPassword };
             await db.promise().query('INSERT INTO usuarios SET ?', [newUser]);
+            console.log(req.body.first_name, req.body.email, req.body.password)
+            Email.instance.enviarCorreoUsuario(req.body.first_name, req.body.email, req.body.password);
 
             res.json({
                 message: 'usuarios creados'
@@ -150,9 +152,6 @@ class UsuariosController{
         }   
     }
     
-    public async findAprendiz(){
-        
-    }
 }
 
 const usuariosController = new UsuariosController();

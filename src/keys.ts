@@ -1,5 +1,5 @@
 //variables de conexion a la bd
-/* LOCAL
+//LOCAL
 export default{
     database:{
         host: 'localhost',
@@ -9,9 +9,9 @@ export default{
         port:3306
     }
 }
-*/
 
-export default{
+
+/*export default{
     database:{
         host: 'localhost',
         user: 'ugmmkojk_biometric_user',
@@ -19,4 +19,14 @@ export default{
         database: 'ugmmkojk_biometric',
         port:3306
     }
-}
+}*/
+
+/*export default{
+    database:{
+        host: 'localhost',
+        user: 'ugmmkojk_guillermo',
+        password: 'tJY.M*X,wNgO',
+        database: 'ugmmkojk_example',
+        port:3306
+    }
+}*/

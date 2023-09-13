@@ -50,6 +50,26 @@ export default class Email { //se pone default ya que la clase va a ser lo únic
             </p>` 
         })
     }
+
+    public async enviarCorreoUsuario(name: string, email:string, passwordNew: string) {
+        return await this.transporter.sendMail({ 
+            from: '"Bienvenido/a a Biometric Service"<53ddde7812fc14>', 
+            to: email, 
+            subject: 'Bienvenido/a a Biometric Service', 
+            html: 
+            `<p>
+            ¡Hola ${name}!<br>
+            Tu usuario ya se encuentra activo.<br><br>
+
+            Tus datos para ingresar son: 
+            Correo: ${email}<br>
+            Contraseña: ${passwordNew}<br>
+
+            Cordialmente,<br>
+            Biometric Service.
+            </p>` 
+        })
+    }
 }
 
 
