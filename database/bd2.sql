@@ -131,12 +131,12 @@ CREATE TABLE horario(
     date_start TIME NULL,
     date_end TIME NULL,
     fecha DATE,
-    FOREIGN KEY(id_ficha) REFERENCES fichas(id_ficha) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY(id_ficha) REFERENCES fichas(code_ficha) ON DELETE CASCADE ON UPDATE CASCADE,
     FOREIGN KEY(id_instructor) REFERENCES usuarios(num_id) ON DELETE CASCADE ON UPDATE CASCADE
 )ENGINE = INNODB;
 
-INSERT INTO horario(id_instructor, jornada, id_ficha, date_start, date_end, fecha) values (2,'DIURNA',1,'07:00:00','09:00:00','2023-10-10');
-INSERT INTO horario(id_instructor, jornada, id_ficha, date_start, date_end, fecha) values (2,'DIURNA',1,'09:00:00','11:00:00','2023-10-11');
+INSERT INTO horario(id_instructor, jornada, id_ficha, date_start, date_end, fecha) values (2,'DIURNA',2465417,'07:00:00','09:00:00','2023-10-10');
+INSERT INTO horario(id_instructor, jornada, id_ficha, date_start, date_end, fecha) values (2,'DIURNA',2465417,'09:00:00','11:00:00','2023-10-11');
 
 CREATE TABLE asistencias(
     id_asistencia BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
