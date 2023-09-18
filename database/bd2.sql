@@ -45,7 +45,7 @@ CREATE TABLE usuarios(
     email VARCHAR(60) UNIQUE NOT NULL,
     estado enum('ACTIVO','INACTIVO') DEFAULT 'ACTIVO', 
     password VARCHAR(80) NOT NULL,
-    biometric_date BIGINT,
+    biometric_date BIGINT UNIQUE,
     photoURL VARCHAR(500),
     created_at TIMESTAMP NULL,
     updated_at TIMESTAMP NULL

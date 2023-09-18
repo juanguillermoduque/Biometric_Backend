@@ -15,6 +15,7 @@ class AsistenciaRoutes{
     this.router.get('/instructor:id',validateToken,asistenciaController.listInstructor);
     this.router.post('/',validateToken,asistenciaController.create);
     this.router.put('/editar:id',validateToken,asistenciaController.update);
+    this.router.delete('/delete/:id',validateToken,asistenciaController.delete);
     this.router.get('/:id',validateToken,asistenciaController.getOne);
    }
 }

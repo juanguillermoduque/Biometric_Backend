@@ -21,7 +21,7 @@ class LoginController {
             const passwordMatch = await bcrypt.compare(passwordProvided, passwordActual);
 
             if (passwordMatch) {
-                const authResult = await db.promise().query('SELECT * FROM usuarios WHERE email=?', [email]);
+                const authResult = await db.promise().query('SELECT * FROM usuarios WHERE email=? and estado = "ACTIVO"', [email]);
                 if (authResult[0].length === 0) {
                     res.status(401).json({ msg: 'Algo salió mal' });
                 } else {
