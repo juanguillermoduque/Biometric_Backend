@@ -38,6 +38,12 @@ class AsistenciasController{
         res.json("asistencia Editada");
     } 
 
+    public async delete(req:Request,res:Response):Promise<void>{
+        const {id} = req.params;
+        await db.promise().query('DELETE from asistencias WHERE id_asistencia = ?',[id]);
+        res.json("asistencia Eliminada");
+    } 
+
     public async getOne(req:Request,res:Response):Promise<any>{ 
         const {id} = req.params;
         const asistencias = await db.promise().query("SELECT * FROM asistencias WHERE id_asistencia = ?",[id]);

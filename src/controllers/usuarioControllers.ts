@@ -25,7 +25,9 @@ class UsuariosController{
                 message: 'usuarios creados'
             });
         } catch (e) {
-            console.error(e);
+            res.json({
+                message: 'Usuario con el campo ingresado ya existe'
+            });
         }
     }
     
