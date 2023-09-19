@@ -4,7 +4,7 @@ import db from '../database';
 class HorariosController{ 
     public async list(req:Request,res:Response):Promise<void>{
        const horario = await db.promise().query('SELECT horario.*,fichas.*, usuarios.* FROM horario INNER JOIN fichas ON horario.id_ficha = fichas.code_ficha INNER JOIN usuarios ON horario.id_instructor = usuarios.num_id');
-       console.log("consulte")
+       console.log(horario[0])
        res.json(horario);
     } 
 
