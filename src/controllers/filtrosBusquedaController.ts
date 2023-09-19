@@ -17,7 +17,7 @@ public async searchUsuario(req:Request,res:Response):Promise<any>{
 
 public async searchHorario(req:Request,res:Response):Promise<any>{
     const {filter} = req.params;
-    const horarioId = await db.promise().query('SELECT horario.*,fichas.*, usuarios.* FROM horario INNER JOIN fichas ON horario.id_ficha = fichas.id_ficha INNER JOIN usuarios ON horario.id_instructor = usuarios.num_id WHERE horario.id_instructor like ? or fichas.code_ficha like ? or horario.fecha like ?',[filter+'%', filter+'%', filter+'%']);
+    const horarioId = await db.promise().query('SELECT horario.*,fichas.*, usuarios.* FROM horario INNER JOIN fichas ON horario.id_ficha = fichas.code_ficha INNER JOIN usuarios ON horario.id_instructor = usuarios.num_id WHERE horario.id_instructor like ? or fichas.code_ficha like ? or horario.fecha like ?',[filter+'%', filter+'%', filter+'%']);
     res.json(horarioId);
     
 }

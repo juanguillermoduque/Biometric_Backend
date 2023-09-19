@@ -27,6 +27,7 @@ class ExcusasController{
 
     public async update(req:Request,res:Response):Promise<void>{
         const {id} = req.params;
+        console.log(req.body)
         await db.promise().query('UPDATE excusa SET ? WHERE id_excusa = ?',[req.body,id]);
         res.json({
             message:"excusa editada"
@@ -35,7 +36,9 @@ class ExcusasController{
 
     public async getOne(req:Request,res:Response):Promise<any>{
         const {id} = req.params;
+        console.log(id)
         const excusa = await db.promise().query("SELECT * FROM excusa WHERE id_excusa = ?",[id]);
+        console.log(excusa[0])
         if(Object.keys(excusa).length > 0){
             return res.json((excusa[0])[0]);
         }
